@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->bigInteger('user_id');
       $table->string('address', 100);
-      $table->string('address_complement', 50);
+      $table->string('address_complement', 50)->nullable();
       $table->string('zip_code', 10);
       $table->string('neighborhood', 50);
       $table->string('city', 50);

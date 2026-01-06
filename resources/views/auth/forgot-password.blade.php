@@ -1,6 +1,7 @@
 <x-app-layout pageTitle='Recuperar senha'>
   <section class="auth-container">
 
+
     <img src="{{ asset('assets/images/logo-min.png') }}" alt="Logo da barbearia" class="auth-logo">
 
     @if (!session('status'))
@@ -17,10 +18,10 @@
         </div>
       </form>
     @else
-      <section>
+      <section class="reset-message">
         <p>Se esta registrado nesta plataforma, irá receber um e-mail com um link para recuperar a sua senha.</p>
         <p>Por favor, verifique a sua caixa de correio.</p>
-        <a href="{{ route('login') }}">Voltar ao login</a>
+        <a href="{{ route('login') }}" class="button">Voltar ao login</a>
       </section>
     @endif
 
