@@ -103,4 +103,4 @@ The UI is built using Blade + HTML + CSS only, with no external UI libraries.
 
 ## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT). This project follows the same licensing.
+The Laravel framework is open-source software licensed under the [MIT license](LICENSE). This project follows the same licensing.
