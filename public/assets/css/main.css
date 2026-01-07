@@ -37,7 +37,8 @@ body {
 }
 
 img.auth-logo {
-  width: 20rem;
+  width: 100%;
+  max-width: 20rem;
   height: auto;
   margin-bottom: 1rem;
 }
@@ -124,14 +125,15 @@ input[type="submit"],
 /* ----- RECUPERAR SENHA ----- */
 .reset-message {
   width: 100%;
-  max-width: 15rem;
-  padding: 0 1rem;
+  max-width: 20rem;
+  padding: 0 0.5rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  row-gap: 0.5rem;
+  row-gap: 1rem;
 
   & p {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 }
 

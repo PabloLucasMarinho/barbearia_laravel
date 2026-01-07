@@ -19,8 +19,11 @@
       </form>
     @else
       <section class="reset-message">
-        <p>Se esta registrado nesta plataforma, irá receber um e-mail com um link para recuperar a sua senha.</p>
-        <p>Por favor, verifique a sua caixa de correio.</p>
+        <p>
+          Você irá receber um e-mail com instruções de para recuperar sua senha.<br><br>
+          Por favor, verifique a sua caixa de
+          correio.
+        </p>
         <a href="{{ route('login') }}" class="button">Voltar ao login</a>
       </section>
     @endif
