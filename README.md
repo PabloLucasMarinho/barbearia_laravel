@@ -1,14 +1,106 @@
-## How to run the application
+# ✂️ Barber Shop System
 
-`docker compose up -d --build`
-after that run
-`docker compose exec app php artisan migrate --force`
-the application will be running at `http://localhost:8000`
+A barbershop management system developed with **Laravel 12**, using **Laravel Fortify** for authentication and **Blade** as the templating engine.  
+The application runs in a fully **Dockerized environment**, ensuring easy setup and consistent execution across different machines.
 
-## How to end the application
+---
 
-`docker compose down`
+## Technologies Used
 
-## How to run artisan
+- PHP 8+
+- Laravel 12
+- Laravel Fortify
+- Blade Templates
+- HTML5 and CSS3
+- MySQL
+- Mailpit
+- Docker
+- Docker Compose
 
-`docker compose exec app <command>`
+---
+
+## Prerequisites
+
+Before starting, make sure you have the following installed on your machine:
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+---
+
+## How to Run the Application
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/PabloLucasMarinho/barbearia_laravel.git
+cd barber-shop-system
+```
+
+### 2. Build and start the containers
+
+```bash
+docker compose up -d --build
+```
+
+Wait until the build process finishes.
+
+### 3. Install dependencies and configure the application
+
+Run the following commands in order:
+
+```bash
+docker compose exec app composer install
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate
+```
+
+Seed the database with sample data:
+
+```bash
+docker compose exec app php artisan db:seed --class=AdminSeeder
+```
+
+### 4. Access the application
+
+After completing the steps above, the application will be available at:
+
+```bash
+http://localhost:8000
+```
+
+---
+
+## Stopping the Application
+
+To stop and remove the containers, run:
+
+```bash
+docker compose down
+```
+
+---
+
+## Notes
+
+Environment variables are managed through the .env file.
+If needed, copy the example file:
+
+```bash
+cp .env.example .env
+```
+
+Authentication is handled by Laravel Fortify, without using front-end frameworks such as Vue or React.
+The UI is built using Blade + HTML + CSS only, with no external UI libraries.
+
+---
+
+## Project Status
+
+🚧 Work in progress 🚧
+
+---
+
+## License
+
+The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT). This project follows the same licensing.
