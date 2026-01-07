@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <title>{{ env('APP_NAME') }} @isset($pageTitle)
+  <title>{{ config('app.name') }} @isset($pageTitle)
       - {{ $pageTitle }}
     @endisset
   </title>

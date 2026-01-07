@@ -1,11 +1,14 @@
-const passwordInput = document.getElementById("password");
+const passwordInput = document.getElementsByClassName("input-password");
 const toggle = document.querySelector(".password .show");
 
-if (passwordInput) {
+if (passwordInput.length !== 0) {
   toggle.addEventListener("click", () => {
-    const isPassword = passwordInput.type === "password";
+    for (let i = 0; i < passwordInput.length; i++) {
+      const input = passwordInput[i];
+      const isPassword = input.type === "password";
 
-    passwordInput.type = isPassword ? "text" : "password";
-    toggle.textContent = isPassword ? "visibility_off" : "visibility";
+      input.type = isPassword ? "text" : "password";
+      toggle.textContent = isPassword ? "visibility_off" : "visibility";
+    }
   });
 }

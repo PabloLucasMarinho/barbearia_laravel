@@ -10,6 +10,9 @@
         <div class="input-wrapper">
           <label for="email">E-mail<span class="required">*</span></label>
           <input type="email" name="email" id="email" autocomplete="email" required />
+          @error('email')
+            <small class="error-message">{{ $message }}</small>
+          @enderror
         </div>
 
         <div class="submit-wrapper">

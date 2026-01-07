@@ -18,4 +18,6 @@ COPY . .
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+RUN docker-php-ext-install opcache
+
 ENTRYPOINT ["/entrypoint.sh"]

@@ -69,6 +69,12 @@ After completing the steps above, the application will be available at:
 http://localhost:8000
 ```
 
+And the Mailpit at:
+
+```bash
+http://localhost:8025
+```
+
 ---
 
 ## Stopping the Application

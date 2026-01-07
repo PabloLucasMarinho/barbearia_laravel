@@ -122,7 +122,9 @@ input[type="submit"],
     color: white;
   }
 }
+
 /* ----- RECUPERAR SENHA ----- */
+
 .reset-message {
   width: 100%;
   max-width: 20rem;
@@ -135,6 +137,12 @@ input[type="submit"],
   & p {
     font-size: 1rem;
   }
+}
+
+/* ----- FORMS ----- */
+.error-message {
+  font-size: 0.7rem;
+  color: var(--primary);
 }
 
 /* ----- MEDIA QUERIES ----- */

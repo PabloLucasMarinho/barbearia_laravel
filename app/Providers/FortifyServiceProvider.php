@@ -8,6 +8,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -51,6 +52,15 @@ class FortifyServiceProvider extends ServiceProvider
 
     Fortify::requestPasswordResetLinkView(function () {
       return view('auth.forgot-password');
+    });
+
+    Fortify::resetPasswordView(function (Request $request) {
+      try {
+        $email = Crypt::decryptString($request->query('email'));
+      } catch (\Exception $e) {
+        abort(403, 'Link de redefinição inválido.');
+      }
+      return view('auth.reset-password', ['token' => $request->route('token'), 'email' => $email]);
     });
   }
 }
