@@ -8,3 +8,7 @@ the application will be running at `http://localhost:8000`
 ## How to end the application
 
 `docker compose down`
+
+## How to run artisan
+
+`docker compose exec app <command>`
