@@ -20,4 +20,6 @@ RUN chmod +x /entrypoint.sh
 
 RUN docker-php-ext-install opcache
 
+RUN git config --global --add safe.directory /var/www
+
 ENTRYPOINT ["/entrypoint.sh"]
