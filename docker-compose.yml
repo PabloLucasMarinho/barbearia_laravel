@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     container_name: laravel_app
-    user: "${DOCKER_UID}:${DOCKER_GID}"
+    user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
     volumes:
       - .:/var/www
       - ./docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
