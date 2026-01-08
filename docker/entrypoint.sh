@@ -9,11 +9,12 @@ if [ ! -f .env ]; then
 fi
 
 # Garantir estrutura necessária
-mkdir -p storage/framework/{cache,views,sessions}
+mkdir -p storage/framework/cache
+mkdir -p storage/framework/views
+mkdir -p storage/framework/sessions
 mkdir -p storage/logs
 
-# Ajustar permissões FINAL (antes do PHP-FPM)
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R 775 storage bootstrap/cache
+# Ajustar permissões SEM mudar ownership
+chmod -R ug+rwX storage bootstrap/cache || true
 
 exec php-fpm

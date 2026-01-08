@@ -11,15 +11,16 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+ENV COMPOSER_HOME=/tmp/composer
+RUN mkdir -p /tmp/composer && chmod -R 777 /tmp/composer
+
 WORKDIR /var/www
 
-COPY . .
+RUN git config --global --add safe.directory /var/www
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 RUN docker-php-ext-install opcache
-
-RUN git config --global --add safe.directory /var/www
 
 ENTRYPOINT ["/entrypoint.sh"]
