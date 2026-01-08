@@ -1,5 +1,8 @@
 <x-app-layout page-title='Login'>
   <section class="auth-container">
+    @if (session('status'))
+      <span class="success-message">{{ session('status') }}</span>
+    @endif
 
     <img src="{{ asset('assets/images/logo-min.png') }}" alt="Logo da barbearia" class="auth-logo">
 

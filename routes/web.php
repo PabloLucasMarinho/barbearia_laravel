@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-  echo ('Hello, World!');
+Route::middleware('auth')->group(function () {
+  Route::redirect('/', 'home');
+  Route::view('/home', 'home')->name('home');
 });

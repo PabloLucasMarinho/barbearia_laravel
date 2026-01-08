@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
       $encryptedEmail = Crypt::encryptString($user->email);
 
       return config('app.url') . '/reset-password/' . $token . '?email=' . urlencode($encryptedEmail);
+    });
+
+    Gate::define('admin', function ($user) {
+      return $user()->role === 'admin';
     });
   }
 }

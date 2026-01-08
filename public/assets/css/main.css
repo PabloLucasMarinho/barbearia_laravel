@@ -2,6 +2,7 @@
 
 :root {
   --primary: #b41918;
+  --success: #33cc33;
 
   --tran-03: all ease-in-out 0.3s;
 }
@@ -143,6 +144,19 @@ input[type="submit"],
 .error-message {
   font-size: 0.7rem;
   color: var(--primary);
+}
+
+.success-message {
+  width: 100%;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+  background-color: var(--success);
+  border-radius: 1rem;
+  padding: 1rem;
+  color: white;
+  font-weight: 700;
 }
 
 /* ----- MEDIA QUERIES ----- */
