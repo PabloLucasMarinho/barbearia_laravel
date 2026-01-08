@@ -16,6 +16,10 @@
 
 <body>
 
+  @auth
+    <x-side-bar />
+  @endauth
+
   {{ $slot }}
 
   <script src="{{ asset('assets/js/main.js') }}"></script>

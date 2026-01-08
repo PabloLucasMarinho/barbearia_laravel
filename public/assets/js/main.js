@@ -12,3 +12,14 @@ if (passwordInput.length !== 0) {
     }
   });
 }
+
+const sideBarMenuBtn = document.getElementById("menu-button");
+const sideBar = document.querySelector(".side-bar.closed");
+
+sideBarMenuBtn.addEventListener("click", () => {
+  const isClosed = sideBar.classList.contains("closed");
+
+  isClosed
+    ? sideBar.classList.replace("closed", "open")
+    : sideBar.classList.replace("open", "closed");
+});

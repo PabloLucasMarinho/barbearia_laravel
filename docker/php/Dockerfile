@@ -16,11 +16,13 @@ RUN mkdir -p /tmp/composer && chmod -R 777 /tmp/composer
 
 WORKDIR /var/www
 
-RUN git config --global --add safe.directory /var/www
+COPY . .
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 RUN docker-php-ext-install opcache
+
+RUN git config --global --add safe.directory /var/www
 
 ENTRYPOINT ["/entrypoint.sh"]

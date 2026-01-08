@@ -6,7 +6,7 @@
 
     <img src="{{ asset('assets/images/logo-min.png') }}" alt="Logo da barbearia" class="auth-logo">
 
-    <form action="" method="POST" class="form-auth">
+    <form action="{{ route('login') }}" method="POST" class="form-auth">
       @csrf
       <div class="input-wrapper">
         <label for="email">E-mail<span class="required">*</span></label>

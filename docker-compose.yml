@@ -4,9 +4,11 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
     container_name: laravel_app
-    user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
+    user: "root"
     volumes:
       - .:/var/www
+      - /var/www/vendor
+      - /var/www/storage
       - ./docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
       - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
     depends_on:

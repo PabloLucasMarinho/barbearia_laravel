@@ -14,7 +14,7 @@ mkdir -p storage/framework/views
 mkdir -p storage/framework/sessions
 mkdir -p storage/logs
 
-# Ajustar permissões SEM mudar ownership
-chmod -R ug+rwX storage bootstrap/cache || true
+chown -R www-data:www-data storage bootstrap/cache
+chmod -R 775 storage bootstrap/cache
 
 exec php-fpm
