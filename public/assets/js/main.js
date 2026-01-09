@@ -14,12 +14,25 @@ if (passwordInput.length !== 0) {
 }
 
 const sideBarMenuBtn = document.getElementById("menu-button");
-const sideBar = document.querySelector(".side-bar.closed");
+const sideBar = document.querySelector(".side-bar");
 
-sideBarMenuBtn.addEventListener("click", () => {
+sideBarMenuBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
   const isClosed = sideBar.classList.contains("closed");
 
   isClosed
     ? sideBar.classList.replace("closed", "open")
     : sideBar.classList.replace("open", "closed");
+});
+
+document.addEventListener("click", (event) => {
+  const isOpen = sideBar.classList.contains("open");
+
+  if (
+    isOpen &&
+    !sideBar.contains(event.target) &&
+    !sideBarMenuBtn.contains(event.target)
+  ) {
+    sideBar.classList.replace("open", "closed");
+  }
 });

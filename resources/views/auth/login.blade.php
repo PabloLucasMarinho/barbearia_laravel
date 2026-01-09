@@ -1,4 +1,8 @@
-<x-app-layout page-title='Login'>
+@extends('components.app-layout')
+
+@section('title', 'Login')
+
+@section('content')
   <section class="auth-container">
     @if (session('status'))
       <span class="success-message">{{ session('status') }}</span>
@@ -37,10 +41,10 @@
       </div>
 
       <div class="submit-wrapper">
-        <input type="submit" value="Entrar">
+        <input type="submit" class="auth-btn" value="Entrar">
         <small><a href="{{ route('password.request') }}">Esqueceu sua senha?</a></small>
       </div>
     </form>
 
   </section>
-</x-app-layout>
+@endsection

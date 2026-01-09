@@ -1,3 +1,22 @@
-<x-app-layout>
+@extends('components.app-layout')
 
-</x-app-layout>
+@section('title', 'Clientes')
+
+@section('content')
+  <section class="main-container">
+    <h1>Clientes</h1>
+
+    <form action="" method="POST" class="search-form">
+      @csrf
+      <input type="search" name="search-client" id="search-client" class="search-client">
+      <input type="submit" value="Procurar" class="search-btn">
+      <a href="">Adicionar</a>
+    </form>
+
+    <section class="list client">
+      <ul>
+
+      </ul>
+    </section>
+  </section>
+@endsection

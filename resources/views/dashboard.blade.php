@@ -1,3 +1,6 @@
-<x-app-layout>
+@extends('components.app-layout')
 
-</x-app-layout>
+@section('title', 'Dashboard')
+
+@section('content')
+@endsection

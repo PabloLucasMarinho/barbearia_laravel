@@ -8,19 +8,16 @@
   <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <title>{{ config('app.name') }} @isset($pageTitle)
-      - {{ $pageTitle }}
-    @endisset
-  </title>
+  <title>{{ config('app.name') }} - @yield('title')</title>
 </head>
 
 <body>
 
   @auth
-    <x-side-bar />
+    @include('components.side-bar')
   @endauth
 
-  {{ $slot }}
+  @yield('content')
 
   <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>

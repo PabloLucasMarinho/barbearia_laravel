@@ -1,4 +1,8 @@
-<x-app-layout pageTitle='Recuperar senha'>
+@extends('components.app-layout')
+
+@section('title', 'Esqueci minha senha')
+
+@section('content')
   <section class="auth-container">
 
 
@@ -16,7 +20,7 @@
         </div>
 
         <div class="submit-wrapper">
-          <input type="submit" value="Recuperar senha">
+          <input type="submit" class="auth-btn" value="Recuperar senha">
           <small><a href="{{ route('login') }}">Já sabe a sua senha?</a></small>
         </div>
       </form>
@@ -32,4 +36,4 @@
     @endif
 
   </section>
-</x-app-layout>
+@endsection

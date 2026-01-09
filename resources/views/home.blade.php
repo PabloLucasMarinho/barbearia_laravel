@@ -1,3 +1,6 @@
-<x-app-layout>
-  <h3>Home</h3>
-</x-app-layout>
+@extends('components.app-layout')
+
+@section('title', 'Início')
+
+@section('content')
+@endsection

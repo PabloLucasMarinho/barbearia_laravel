@@ -1,4 +1,8 @@
-<x-app-layout page-title='Recuperar senha'>
+@extends('components.app-layout')
+
+@section('title', 'Recuperar senha')
+
+@section('content')
   <section class="auth-container">
 
     <img src="{{ asset('assets/images/logo-min.png') }}" alt="Logo da barbearia" class="auth-logo">
@@ -38,10 +42,11 @@
       </div>
 
       <div class="submit-wrapper">
-        <input type="submit" value="Definir senha">
+        <input type="submit" class="auth-btn" value="Definir senha">
         <small><a href="{{ route('login') }}">Já sabe sua senha?</a></small>
       </div>
     </form>
 
   </section>
-</x-app-layout>
+  </x-app-layout>
+@endsection
