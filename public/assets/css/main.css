@@ -200,6 +200,33 @@ aside {
   right: 10px;
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  padding: 3rem 0 3rem 0;
+}
+
+.menu-item {
+  display: block;
+  background-color: transparent;
+  color: black;
+  padding-left: 1rem;
+}
+
+.menu-item a {
+  display: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
+
 /* ----- MEDIA QUERIES ----- */
 
 @media (min-width: 768px) {
