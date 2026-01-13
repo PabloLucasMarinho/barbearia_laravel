@@ -4,8 +4,13 @@
   --bg-dark: oklch(0.92 0 20);
   --bg: oklch(0.96 0 20);
   --bg-light: oklch(1 0 20);
+
+  --neutral: oklch(0 0 0);
+  --neutral-light: oklch(0.2686 0 0);
+
   --danger: oklch(0.4939 0.188 27.9);
   --warning: oklch(0.968 0.211 109.77);
+  --success-dark: oklch(0.6765 0.2268 142.85);
   --success: oklch(0.7395 0.2268 142.85);
   --info: oklch(0.452 0.313214 264.052);
 
@@ -131,7 +136,7 @@ img.auth-logo {
   }
 }
 
-/* ----- RECUPERAR SENHA ----- */
+/* ----- RESET PASSWORD ----- */
 
 .reset-message {
   width: 100%;
@@ -259,6 +264,10 @@ aside {
 }
 
 /* ----- SEARCH FORMS ----- */
+.main-container h1 {
+  margin-left: 0.5rem;
+}
+
 .search-form {
   width: 100%;
   padding: 0 0.5rem;
@@ -267,7 +276,6 @@ aside {
   grid-template-columns: 1fr 6rem;
   column-gap: 0.5rem;
   row-gap: 1rem;
-  background-color: var(--bg);
 }
 
 .search-client {
@@ -276,29 +284,45 @@ aside {
 }
 
 .search-btn {
-  background-color: transparent;
-  border: 1px solid var(--info);
+  background-color: var(--neutral-light);
+  color: white;
+  border: none;
   border-radius: 0.5rem;
   height: 2rem;
   font-weight: 700;
-  color: var(--info);
   font-size: 1rem;
+  cursor: pointer;
+  transition: var(--tran-03);
+
+  &:hover {
+    background-color: var(--neutral);
+  }
 }
 
 .search-form a {
   grid-column: 2;
   grid-row: 2;
-  background-color: transparent;
-  border: 1px solid var(--success);
+  background-color: var(--success-dark);
+  border: none;
   border-radius: 0.5rem;
   height: 2rem;
   font-weight: 700;
-  color: var(--success);
+  color: white;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
+  transition: var(--tran-03);
+
+  &:hover {
+    background-color: var(--success);
+  }
+}
+
+/* ----- GENERAL ----- */
+.main-container {
+  padding-top: 2rem;
 }
 
 /* ----- MEDIA QUERIES ----- */

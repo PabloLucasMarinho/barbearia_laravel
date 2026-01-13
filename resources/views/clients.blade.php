@@ -14,9 +14,13 @@
     </form>
 
     <section class="list client">
-      <ul>
+      @if ($clients->count() === 0)
+        Sem clientes
+      @else
+        <ul>
 
-      </ul>
+        </ul>
+      @endif
     </section>
   </section>
 @endsection
