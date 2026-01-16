@@ -20,7 +20,7 @@
         </div>
 
         <div class="submit-wrapper">
-          <input type="submit" class="auth-btn" value="Recuperar senha">
+          <input type="submit" class="btn" value="Recuperar senha">
           <small><a href="{{ route('login') }}">Já sabe a sua senha?</a></small>
         </div>
       </form>

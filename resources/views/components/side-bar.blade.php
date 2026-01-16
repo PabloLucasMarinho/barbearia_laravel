@@ -9,15 +9,15 @@
       </li>
 
       <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
-        <a href="{{ route('clients') }}">Clientes</a>
+        <a href="{{ route('clients.clients') }}">Clientes</a>
       </li>
 
       <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
-        <a href="{{ route('clients') }}">Colaboradores</a>
+        <a href="#">Colaboradores</a>
       </li>
 
       <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
-        <a href="{{ route('clients') }}">Serviços</a>
+        <a href="#">Serviços</a>
       </li>
     </ul>
 

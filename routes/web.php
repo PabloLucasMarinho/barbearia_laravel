@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,6 +9,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-  Route::view('/dashboard', 'dashboard')->name('dashboard');
-  Route::view('/clients', 'clients')->name('clients');
+  Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+  Route::get('/clients', [ClientController::class, 'index'])->name('clients.clients');
 });

@@ -272,31 +272,15 @@ aside {
   width: 100%;
   padding: 0 0.5rem;
   display: grid;
-  grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 6rem;
   column-gap: 0.5rem;
   row-gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .search-client {
   border-radius: 0.5rem;
   border: 1px solid black;
-}
-
-.search-btn {
-  background-color: var(--neutral-light);
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  height: 2rem;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: var(--tran-03);
-
-  &:hover {
-    background-color: var(--neutral);
-  }
 }
 
 .search-form a {
@@ -320,9 +304,39 @@ aside {
   }
 }
 
+/* ----- CLIENTS ----- */
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.5rem;
+}
+
 /* ----- GENERAL ----- */
 .main-container {
   padding-top: 2rem;
+}
+
+.btn {
+  background-color: var(--neutral-light);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  height: 2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--tran-03);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+
+  &:hover {
+    background-color: var(--neutral);
+  }
 }
 
 /* ----- MEDIA QUERIES ----- */

@@ -42,7 +42,7 @@
       </div>
 
       <div class="submit-wrapper">
-        <input type="submit" class="auth-btn" value="Definir senha">
+        <input type="submit" class="btn" value="Definir senha">
         <small><a href="{{ route('login') }}">Já sabe sua senha?</a></small>
       </div>
     </form>

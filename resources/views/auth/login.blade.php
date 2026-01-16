@@ -41,7 +41,7 @@
       </div>
 
       <div class="submit-wrapper">
-        <input type="submit" class="auth-btn" value="Entrar">
+        <input type="submit" class="btn" value="Entrar">
         <small><a href="{{ route('password.request') }}">Esqueceu sua senha?</a></small>
       </div>
     </form>
