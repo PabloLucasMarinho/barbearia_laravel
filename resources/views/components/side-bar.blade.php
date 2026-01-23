@@ -8,16 +8,11 @@
         <a href="{{ route('dashboard') }}">Dashboard</a>
       </li>
 
-      <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
+      <li @class([
+          'menu-item',
+          'active' => request()->routeIs('clients.clients'),
+      ])>
         <a href="{{ route('clients.clients') }}">Clientes</a>
-      </li>
-
-      <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
-        <a href="#">Colaboradores</a>
-      </li>
-
-      <li @class(['menu-item', 'active' => request()->routeIs('clients')])>
-        <a href="#">Serviços</a>
       </li>
     </ul>
 

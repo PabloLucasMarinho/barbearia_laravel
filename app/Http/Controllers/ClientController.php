@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClientRequest;
 use App\Models\Client;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -23,15 +23,24 @@ class ClientController extends Controller
    */
   public function create()
   {
-    //
+    return view('clients.new-client');
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreClientRequest $request)
   {
-    //
+    Client::create([
+      'name' => $request->name,
+      'document' => $request->document,
+      'date_of_birth' => $request->date_of_birth,
+      'phone' => $request->phone
+    ]);
+
+    return redirect()
+      ->route('clients.clients')
+      ->with('success', 'Cliente cadastrado com sucesso!');
   }
 
   /**
@@ -53,7 +62,7 @@ class ClientController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(StoreClientRequest $request, string $id)
   {
     //
   }
