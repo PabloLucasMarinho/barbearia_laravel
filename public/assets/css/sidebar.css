@@ -1,0 +1,90 @@
+aside {
+  width: 12rem;
+  min-height: 100vh;
+  height: 100%;
+  background-color: var(--bg-light);
+  position: absolute;
+  transition: var(--tran-03);
+  z-index: 10;
+}
+
+.side-bar-menu-button {
+  position: absolute;
+  top: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: var(--tran-03);
+}
+
+.closed {
+  width: 0;
+}
+
+.closed .side-bar-menu-button {
+  right: -30px;
+}
+
+.open {
+  width: 12rem;
+}
+
+.open .side-bar-menu-button {
+  right: 10px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+  padding: 3rem 0 1rem 0;
+  transition: var(--tran-02);
+}
+
+.closed > .menu {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50px);
+}
+
+.menu-item {
+  display: block;
+  background-color: transparent;
+  color: black;
+  padding-left: 1rem;
+}
+
+.menu-item a {
+  display: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
+
+.menu form {
+  padding: 0 1rem;
+}
+
+.logout-btn {
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  width: 100%;
+  height: 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  transition: var(--tran-03);
+
+  &:hover {
+    background-color: var(--danger);
+    color: var(--bg);
+  }
+}

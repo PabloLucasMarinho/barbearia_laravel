@@ -9,14 +9,14 @@
     <form action="" method="POST" class="search-form">
       @csrf
       <input type="search" name="search-client" id="search-client" class="search-client">
-      <input type="submit" value="Procurar" class="btn">
+      <input type="submit" value="Procurar" class="btn neutral-btn">
     </form>
 
     <section class="mobile">
       @if ($clients->count() === 0)
         <section class="add-btn">
           <p>Nenhum cliente cadastrado.</p>
-          <a href="{{ route('clients.new-client') }}" class="btn">
+          <a href="{{ route('clients.new-client') }}" class="btn success-btn">
             <i class="material-symbols-rounded">
               add
             </i>
@@ -25,7 +25,7 @@
       @else
         <section class="card-grid">
           {{-- <div class="add-btn-wrap"> --}}
-          <a href="{{ route('clients.new-client') }}" class="add-btn">
+          <a href="{{ route('clients.new-client') }}" class="add-btn success-btn">
             <i class="material-symbols-rounded">
               add
             </i>
@@ -57,8 +57,11 @@
 
               <div>
                 <a href="" class="btn">Agendar</a>
-                <a href="" class="btn">Editar</a>
-                <a href="" class="btn">Excluir</a>
+                <a href="" class="btn neutral-btn">Editar</a>
+                <button type="button" class="btn danger-btn" data-id="{{ $client->id }}"
+                  data-name="{{ $client->name }}" onclick="openDeleteModal(this)">
+                  Excluir
+                </button>
               </div>
             </div>
           @endforeach
@@ -66,11 +69,27 @@
       @endif
     </section>
 
+    <dialog id="delete-dialog">
+      <div class="dialog-content">
+        <h2 id="dialog-title"></h2>
+        <p>Essa ação é permanente e não poderá ser desfeita.</p>
+
+        <div class="dialog-choose">
+          <form id="delete-form" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn danger-btn">Sim</button>
+          </form>
+          <button autofocus class="btn neutral-btn" onclick="closeDeleteModal()">Não</button>
+        </div>
+      </div>
+    </dialog>
+
     <section class="desktop">
       @if ($clients->count() === 0)
         <section class="table">
           <p>Nenhum cliente cadastrado.</p>
-          <a href="{{ route('clients.new-client') }}" class="btn">
+          <a href="{{ route('clients.new-client') }}" class="btn success-btn">
             <span class="material-symbols-rounded">
               add
             </span>
