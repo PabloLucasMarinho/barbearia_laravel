@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,7 @@ class ClientController extends Controller
    */
   public function create()
   {
-    return view('clients.new-client');
+    return view('clients.add-client');
   }
 
   /**
@@ -32,14 +33,12 @@ class ClientController extends Controller
   public function store(StoreClientRequest $request)
   {
     Client::create([
-      'name' => $request->name,
-      'document' => $request->document,
-      'date_of_birth' => $request->date_of_birth,
-      'phone' => $request->phone
+      ...$request->validated(),
+      'user_uuid' => auth()->id(),
     ]);
 
     return redirect()
-      ->route('clients.clients')
+      ->route('clients.index')
       ->with('success', 'Cliente cadastrado com sucesso!');
   }
 
@@ -54,28 +53,32 @@ class ClientController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(Client $client)
   {
-    //
+    return view('clients.edit-client', compact('client'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(StoreClientRequest $request, string $id)
+  public function update(UpdateClientRequest $request, Client $client)
   {
-    //
+    $this->authorize('update', $client);
+
+    $client->update($request->validated());
+
+    return redirect()->route('clients.index');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(Client $client)
   {
-    $client = Client::findOrFail($id);
+    $this->authorize('delete', $client);
 
     $client->delete();
 
-    return redirect()->route('clients.clients');
+    return redirect()->route('clients.index');
   }
 }

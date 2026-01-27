@@ -83,7 +83,7 @@ docker compose exec app php artisan migrate
 Seed the database with sample data:
 
 ```bash
-docker compose exec app php artisan db:seed --class=AdminSeeder
+docker compose exec app php artisan db:seed
 ```
 
 ### 5. Access the application

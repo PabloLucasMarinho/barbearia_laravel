@@ -14,9 +14,9 @@
 
     <section class="mobile">
       @if ($clients->count() === 0)
-        <section class="add-btn">
+        <section class="no-client-message">
           <p>Nenhum cliente cadastrado.</p>
-          <a href="{{ route('clients.new-client') }}" class="btn success-btn">
+          <a href="{{ route('clients.create') }}" class="success-btn">
             <i class="material-symbols-rounded">
               add
             </i>
@@ -25,7 +25,7 @@
       @else
         <section class="card-grid">
           {{-- <div class="add-btn-wrap"> --}}
-          <a href="{{ route('clients.new-client') }}" class="add-btn success-btn">
+          <a href="{{ route('clients.create') }}" class="add-btn success-btn">
             <i class="material-symbols-rounded">
               add
             </i>
@@ -38,7 +38,7 @@
 
                 <p>
                   <i class="material-symbols-rounded">calendar_month</i>
-                  {{ $client->birth_date }}
+                  {{ $client->date_of_birth_formatted }}
                 </p>
               </div>
 
@@ -57,11 +57,17 @@
 
               <div>
                 <a href="" class="btn">Agendar</a>
-                <a href="" class="btn neutral-btn">Editar</a>
-                <button type="button" class="btn danger-btn" data-id="{{ $client->id }}"
-                  data-name="{{ $client->name }}" onclick="openDeleteModal(this)">
-                  Excluir
-                </button>
+
+                @can('update', $client)
+                  <a href="{{ route('clients.edit', $client) }}" class="btn neutral-btn">Editar</a>
+                @endcan
+
+                @can('delete', $client)
+                  <button type="button" class="btn danger-btn" data-action="{{ route('clients.destroy', $client) }}"
+                    data-name="{{ $client->name }}" onclick="openDeleteModal(this)">
+                    Excluir
+                  </button>
+                @endcan
               </div>
             </div>
           @endforeach
@@ -89,7 +95,7 @@
       @if ($clients->count() === 0)
         <section class="table">
           <p>Nenhum cliente cadastrado.</p>
-          <a href="{{ route('clients.new-client') }}" class="btn success-btn">
+          <a href="{{ route('clients.create') }}" class="btn success-btn">
             <span class="material-symbols-rounded">
               add
             </span>

@@ -6,7 +6,7 @@
   <section class="main-container">
     <h1>Cadastrar</h1>
 
-    <form action="{{ route('clients.store-client') }}" method="post" class="register-client-form">
+    <form action="{{ route('clients.store') }}" method="post" class="register-client-form">
       @csrf
 
       <div class="input-container">
@@ -43,7 +43,7 @@
       </div>
 
       <div class="input-container">
-        <input type="submit" value="Cadastrar" class="btn">
+        <input type="submit" value="Cadastrar" class="btn neutral-btn">
       </div>
 
     </form>

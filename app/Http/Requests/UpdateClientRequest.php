@@ -8,7 +8,7 @@ use App\Rules\Phone;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -25,11 +25,11 @@ class StoreClientRequest extends FormRequest
    */
   public function rules(): array
   {
-    $id = $this->route('id');
+    $client = $this->route('client');
 
     return [
       'name' => 'required|string|min:2|max:255',
-      'document' => ['required', new Cpf, Rule::unique('clients', 'document')],
+      'document' => ['required', new Cpf, Rule::unique('clients', 'document')->ignore($client)],
       'date_of_birth' => ['required', new DateOfBirth],
       'phone' => ['required', new Phone]
     ];

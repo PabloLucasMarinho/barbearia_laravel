@@ -42,11 +42,10 @@ const title = document.getElementById("dialog-title");
 const form = document.getElementById("delete-form");
 
 function openDeleteModal(button) {
-  const id = button.dataset.id;
   const name = button.dataset.name;
 
   title.textContent = `Deseja excluir os dados de ${name}?`;
-  form.action = `/delete-client/${id}`;
+  form.action = button.dataset.action;
 
   dialog.showModal();
 }

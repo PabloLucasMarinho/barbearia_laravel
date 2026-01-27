@@ -11,17 +11,16 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('clients', function (Blueprint $table) {
-      $table->uuid('uuid')->primary();
+    Schema::create('user_role', function (Blueprint $table) {
       $table->foreignUuid('user_uuid')
         ->constrained('users', 'uuid')
         ->cascadeOnDelete();
-      $table->string('name');
-      $table->date('date_of_birth');
-      $table->string('document');
-      $table->string('phone', 20);
-      $table->timestamps();
-      $table->softDeletes();
+
+      $table->foreignUuid('role_uuid')
+        ->constrained('roles', 'uuid')
+        ->cascadeOnDelete();
+
+      $table->primary(['user_uuid', 'role_uuid']);
     });
   }
 
@@ -30,6 +29,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('clients');
+    Schema::dropIfExists('user_role');
   }
 };
