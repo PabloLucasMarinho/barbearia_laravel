@@ -6,10 +6,15 @@
   <section class="main-container">
     <h1>Clientes</h1>
 
-    <form action="" method="POST" class="search-form">
+    <form action="{{ route('clients.index') }}" method="GET" class="search-form">
       @csrf
-      <input type="search" name="search-client" id="search-client" class="search-client">
-      <input type="submit" value="Procurar" class="btn neutral-btn">
+      <input type="search" name="search" id="search-client" 
+        placeholder="Pesquisar cliente..." class="search-client"
+        value="{{ request('search') }}">
+
+      <button type="submit">
+          <i class="material-symbols-rounded">search</i>
+      </button>
     </form>
 
     <section class="mobile">
@@ -23,54 +28,29 @@
           </a>
         </section>
       @else
-        <section class="card-grid">
-          {{-- <div class="add-btn-wrap"> --}}
+        <section class="clients-list">
+
           <a href="{{ route('clients.create') }}" class="add-btn success-btn">
             <i class="material-symbols-rounded">
               add
             </i>
           </a>
-          {{-- </div> --}}
-          @foreach ($clients as $client)
-            <div class="client-card">
-              <div>
-                <p>{{ $client->name }}</p>
 
-                <p>
-                  <i class="material-symbols-rounded">calendar_month</i>
-                  {{ $client->date_of_birth_formatted }}
-                </p>
-              </div>
+          <table>
+            <tr>
+              <th>Nome</th>
+            </tr>
+            @foreach ($clients as $client)
+              <tr>
+                <td>
+                  <a href="{{ route('clients.show', $client) }}">
+                    {{ $client->name }}
+                  </a>
+                </td>
+              </tr>
+            @endforeach
+          </table>
 
-              <hr>
-
-              <div>
-                <p>
-                  <i class="material-symbols-rounded">id_card</i>
-                  {{ $client->document }}
-                </p>
-                <p>
-                  <i class="material-symbols-rounded">phone_enabled</i>
-                  {{ $client->phone }}
-                </p>
-              </div>
-
-              <div>
-                <a href="" class="btn">Agendar</a>
-
-                @can('update', $client)
-                  <a href="{{ route('clients.edit', $client) }}" class="btn neutral-btn">Editar</a>
-                @endcan
-
-                @can('delete', $client)
-                  <button type="button" class="btn danger-btn" data-action="{{ route('clients.destroy', $client) }}"
-                    data-name="{{ $client->name }}" onclick="openDeleteModal(this)">
-                    Excluir
-                  </button>
-                @endcan
-              </div>
-            </div>
-          @endforeach
         </section>
       @endif
     </section>

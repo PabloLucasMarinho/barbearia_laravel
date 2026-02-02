@@ -8,7 +8,7 @@
       <span class="success-message">{{ session('status') }}</span>
     @endif
 
-    <img src="{{ asset('assets/images/logo-min.png') }}" alt="Logo da barbearia" class="auth-logo">
+    <img src="{{ asset('assets/images/logo.png') }}" alt="Logo da barbearia" class="auth-logo">
 
     <form action="{{ route('login') }}" method="POST" class="form-auth">
       @csrf

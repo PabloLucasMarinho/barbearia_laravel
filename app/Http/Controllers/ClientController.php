@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -12,9 +13,13 @@ class ClientController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-    $clients = Client::all();
+    $search = $request->query('search');
+
+    $clients = Client::when($search, function ($query, $search) {
+      $query->where('name', 'like', "%{$search}%");
+    })->get();
 
     return view('clients.clients', compact('clients'));
   }
@@ -45,9 +50,9 @@ class ClientController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show(Client $client)
   {
-    //
+    return view('clients.client', compact('client'));
   }
 
   /**

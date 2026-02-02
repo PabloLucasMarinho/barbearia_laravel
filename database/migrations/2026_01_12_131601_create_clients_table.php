@@ -17,6 +17,7 @@ return new class extends Migration
         ->constrained('users', 'uuid')
         ->cascadeOnDelete();
       $table->string('name');
+      $table->char('initials', 2)->nullable();
       $table->date('date_of_birth');
       $table->string('document');
       $table->string('phone', 20);
