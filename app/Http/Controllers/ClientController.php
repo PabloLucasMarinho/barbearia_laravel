@@ -23,7 +23,7 @@ class ClientController extends Controller
       $query->where('name', 'like', "%$search%");
     })->get();
 
-    return view('clients.clients', compact('clients'));
+    return view('clients.index', compact('clients'));
   }
 
   /**
@@ -33,7 +33,7 @@ class ClientController extends Controller
   {
     Gate::authorize('create', Client::class);
 
-    return view('clients.add-client');
+    return view('clients.create');
   }
 
   /**
@@ -60,7 +60,7 @@ class ClientController extends Controller
   {
     Gate::authorize('view', $client);
 
-    return view('clients.client', compact('client'));
+    return view('clients.show', compact('client'));
   }
 
   /**
@@ -70,7 +70,7 @@ class ClientController extends Controller
   {
     Gate::authorize('update', $client);
 
-    return view('clients.edit-client', compact('client'));
+    return view('clients.edit', compact('client'));
   }
 
   /**
@@ -82,7 +82,7 @@ class ClientController extends Controller
 
     $client->update($request->validated());
 
-    return redirect()->route('clients.index');
+    return redirect()->route('clients.show', $client);
   }
 
   /**
