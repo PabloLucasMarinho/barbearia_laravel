@@ -4,16 +4,24 @@ namespace App\Policies;
 
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ClientPolicy
 {
+  public function before(User $user, string $ability): ?bool
+  {
+    if ($user->hasRole('admin')) {
+      return true;
+    }
+
+    return null;
+  }
+
   /**
    * Determine whether the user can view any models.
    */
   public function viewAny(User $user): bool
   {
-    return false;
+    return $user->hasRole('employee');
   }
 
   /**
@@ -21,7 +29,7 @@ class ClientPolicy
    */
   public function view(User $user, Client $client): bool
   {
-    return false;
+    return $user->hasRole('employee');
   }
 
   /**
@@ -29,7 +37,7 @@ class ClientPolicy
    */
   public function create(User $user): bool
   {
-    return false;
+    return $user->hasRole('employee');
   }
 
   /**
@@ -37,11 +45,7 @@ class ClientPolicy
    */
   public function update(User $user, Client $client): bool
   {
-    if ($user->hasRole('admin')) {
-      return true;
-    }
-
-    return $client->user_uuid === $user->uuid;
+    return $user->hasRole('employee') && $client->user_uuid === $user->uuid;
   }
 
   /**
@@ -49,13 +53,13 @@ class ClientPolicy
    */
   public function delete(User $user, Client $client): bool
   {
-    return $user->hasRole('admin');
+    return false;
   }
 
   /**
    * Determine whether the user can restore the model.
    */
-  public function restore(User $user, Client $client): bool
+  public function restore(): bool
   {
     return false;
   }
@@ -63,7 +67,7 @@ class ClientPolicy
   /**
    * Determine whether the user can permanently delete the model.
    */
-  public function forceDelete(User $user, Client $client): bool
+  public function forceDelete(): bool
   {
     return false;
   }

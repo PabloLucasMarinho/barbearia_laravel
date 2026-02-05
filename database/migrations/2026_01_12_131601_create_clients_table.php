@@ -4,15 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
   /**
    * Run the migrations.
    */
   public function up(): void
   {
     Schema::create('clients', function (Blueprint $table) {
-      $table->uuid('uuid')->primary();
+      $table->uuid()->primary();
       $table->foreignUuid('user_uuid')
         ->constrained('users', 'uuid')
         ->cascadeOnDelete();
@@ -21,6 +20,7 @@ return new class extends Migration
       $table->date('date_of_birth');
       $table->string('document');
       $table->string('phone', 20);
+      $table->string('color', 7)->nullable();
       $table->timestamps();
       $table->softDeletes();
     });

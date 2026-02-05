@@ -1,224 +1,193 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "login.css";
 @import "sidebar.css";
 @import "search.css";
 @import "clients.css";
 
 :root {
-    --bg-dark: hsl(0, 0%, 90%);
-    --bg: hsl(0, 0%, 95%);
-    --bg-light: hsl(0, 0%, 100%);
+  --bg-dark: hsl(0, 0%, 90%);
+  --bg: hsl(0, 0%, 95%);
+  --bg-light: hsl(0, 0%, 100%);
 
-    --dark: hsl(0, 0%, 5%);
-    --dark-muted: hsl(0, 0%, 30%);
+  --dark: hsl(0, 0%, 5%);
+  --dark-muted: hsl(0, 0%, 30%);
 
-    --neutral: oklch(0 0 0);
-    --neutral-light: oklch(0.2686 0 0);
+  --text: hsl(0, 0%, 5%);
 
-    --danger-dark: oklch(0.4 0.2 30);
-    --danger: oklch(0.5 0.2 30);
-    --danger-light: oklch(0.7 0.2 30);
-    --warning: oklch(0.968 0.211 109.77);
-    --success-dark: oklch(0.5 0.2 145);
-    --success: oklch(0.6 0.2 145);
-    --success-light: oklch(0.7 0.2 145);
-    --info: oklch(0.6 0.3 260);
-    --info-dark: oklch(0.4 0.3 260);
+  --neutral: oklch(0 0 0);
+  --neutral-light: oklch(0.2686 0 0);
 
-    --shadow-s: inset 0 1px 2px #ffffff30,
-        0 1px 2px #00000030,
-        0 2px 4px #00000015;
-    --shadow-m: inset 0 1px 2px #ffffff50,
-        0 2px 4px #00000030,
-        0 4px 8px #00000015;
-    --shadow-l: inset 0 1px 2px #ffffff70,
-        0 4px 6px #00000030,
-        0 6px 10px #00000015;
+  --danger-dark: oklch(0.4 0.2 30);
+  --danger: oklch(0.5 0.2 30);
+  --danger-light: oklch(0.7 0.2 30);
+  --warning: oklch(0.968 0.211 109.77);
+  --success-dark: oklch(0.5 0.2 145);
+  --success: oklch(0.6 0.2 145);
+  --success-light: oklch(0.7 0.2 145);
+  --info: oklch(0.6 0.3 260);
+  --info-dark: oklch(0.4 0.3 260);
 
-    --tran-01: all 0.1s ease-in-out;
-    --tran-02: all 0.2s ease-in-out;
-    --tran-03: all 0.3s ease-in-out;
-    --tran-04: all 0.4s ease-in-out;
-    --tran-05: all 0.5s ease-in-out;
+  --shadow-s: inset 0 1px 2px #ffffff30,
+  0 1px 2px #00000030,
+  0 2px 4px #00000015;
+  --shadow-m: inset 0 1px 2px #ffffff50,
+  0 2px 4px #00000030,
+  0 4px 8px #00000015;
+  --shadow-l: inset 0 1px 2px #ffffff70,
+  0 4px 6px #00000030,
+  0 6px 10px #00000015;
+
+  --tran-01: all 0.1s ease-in-out;
+  --tran-02: all 0.2s ease-in-out;
+  --tran-03: all 0.3s ease-in-out;
+  --tran-04: all 0.4s ease-in-out;
+  --tran-05: all 0.5s ease-in-out;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    accent-color: var(--danger);
-    -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  accent-color: var(--danger);
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
-    font-family: "Poppins", sans-serif;
-    scrollbar-gutter: stable;
-    color: var(--text);
+  font-family: "Ubuntu", sans-serif;
+  scrollbar-gutter: stable;
+  color: var(--text);
 }
 
 html:has(#delete-dialog[open]) {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    max-width: 100vw;
-    min-height: 100vh;
-    background-color: var(--bg-dark);
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
 }
 
 /* ----- FORMS ----- */
 .error-message {
-    font-size: 0.7rem;
-    color: var(--danger);
+  font-size: 0.7rem;
+  color: var(--danger);
 }
 
 .success-message {
-    width: 100%;
-    max-width: 20rem;
-    margin-bottom: 1rem;
-    display: block;
-    width: 100%;
-    background-color: var(--success);
-    border-radius: 1rem;
-    padding: 1rem;
-    color: white;
-    font-weight: 700;
-}
-
-.register-client-form {
-    padding: 0 0.5rem;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 1fr 1fr 1fr;
-    column-gap: 0.5rem;
-}
-
-.input-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-}
-
-.input-container label {
-    word-break: break-word;
-}
-
-.input-container input {
-    height: 2rem;
-    border: 1px solid black;
-    border-radius: 0.25rem;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-}
-
-.input-container:last-child {
-    grid-column: span 2;
+  width: 100%;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+  display: block;
+  background-color: var(--success);
+  border-radius: 1rem;
+  padding: 1rem;
+  color: white;
+  font-weight: 700;
 }
 
 /* ----- GENERAL ----- */
 .mobile {
-    display: block;
+  display: block;
 }
 
 .desktop {
-    display: none;
+  display: none;
 }
 
 .main-container {
-    padding: .5rem 1rem;
-    max-width: 100vw;
-    width: 100%;
+  padding: .5rem .5rem;
+  max-width: 100vw;
+  width: 100%;
 
-    h1 {
-        text-align: right;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
+  h1 {
+    text-align: right;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .btn {
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    height: 2rem;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: var(--tran-03);
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 1rem;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  height: 2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--tran-03);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
 }
 
 .neutral-btn {
-    background-color: var(--neutral-light);
-    transition: var(--tran-03);
+  background-color: var(--neutral-light);
+  transition: var(--tran-03);
 
-    &:hover {
-        background-color: var(--neutral);
-    }
+  &:hover {
+    background-color: var(--neutral);
+  }
 }
 
 .danger-btn {
-    background-color: var(--danger);
-    transition: var(--tran-03);
+  background-color: var(--danger);
+  transition: var(--tran-03);
 
-    &:hover {
-        background-color: var(--danger-dark);
-    }
+  &:hover {
+    background-color: var(--danger-dark);
+  }
 }
 
 .success-btn {
-    background-color: var(--success-dark);
-    transition: var(--tran-03);
+  background-color: var(--success-dark);
+  transition: var(--tran-03);
 
-    &:hover {
-        background-color: var(--success);
-    }
+  &:hover {
+    background-color: var(--success);
+  }
 }
 
 .errors {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background-color: var(--danger-light);
-    color: black;
-    display: flex;
-    flex-direction: column;
-    font-weight: 700;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: var(--danger-light);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
 }
 
 .required {
-    color: var(--danger);
+  color: var(--danger);
 }
 
 .material-symbols-rounded {
-    font-variation-settings: "FILL" 1;
+  font-variation-settings: "FILL" 1;
 }
 
 /* ----- MEDIA QUERIES ----- */
 
 @media (min-width: 768px) {
-    html {
-        font-size: 1.1rem;
-    }
+  html {
+    font-size: 1.1rem;
+  }
 
-    input {
-        font-size: 0.8rem;
-    }
+  input {
+    font-size: 0.8rem;
+  }
 }
 
 @media (min-width: 1024px) {
-    html {
-        font-size: 1.25rem;
-    }
+  html {
+    font-size: 1.25rem;
+  }
 
-    input {
-        font-size: 1rem;
-    }
+  input {
+    font-size: 1rem;
+  }
 }

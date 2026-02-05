@@ -53,3 +53,21 @@ function openDeleteModal(button) {
 function closeDeleteModal() {
   dialog.close();
 }
+
+function paddingAdjust() {
+  const wrappers = document.querySelectorAll('.input-container');
+
+  wrappers.forEach(wrapper => {
+    const label = wrapper.querySelector('.dynamic-label');
+    const input = wrapper.querySelector('.dynamic-input');
+
+    if (label && input) {
+      const labelWidth = label.offsetWidth;
+      input.style.paddingLeft = `calc(${labelWidth}px + 0.5rem)`;
+    }
+  })
+}
+
+window.addEventListener('load', paddingAdjust);
+
+window.addEventListener('resize', paddingAdjust);

@@ -6,7 +6,7 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
@@ -15,10 +15,12 @@ class ClientController extends Controller
    */
   public function index(Request $request)
   {
+    Gate::authorize('viewAny', Client::class);
+
     $search = $request->query('search');
 
     $clients = Client::when($search, function ($query, $search) {
-      $query->where('name', 'like', "%{$search}%");
+      $query->where('name', 'like', "%$search%");
     })->get();
 
     return view('clients.clients', compact('clients'));
@@ -29,6 +31,8 @@ class ClientController extends Controller
    */
   public function create()
   {
+    Gate::authorize('create', Client::class);
+
     return view('clients.add-client');
   }
 
@@ -37,6 +41,8 @@ class ClientController extends Controller
    */
   public function store(StoreClientRequest $request)
   {
+    Gate::authorize('create', Client::class);
+
     Client::create([
       ...$request->validated(),
       'user_uuid' => auth()->id(),
@@ -52,6 +58,8 @@ class ClientController extends Controller
    */
   public function show(Client $client)
   {
+    Gate::authorize('view', $client);
+
     return view('clients.client', compact('client'));
   }
 
@@ -60,6 +68,8 @@ class ClientController extends Controller
    */
   public function edit(Client $client)
   {
+    Gate::authorize('update', $client);
+
     return view('clients.edit-client', compact('client'));
   }
 
@@ -68,7 +78,7 @@ class ClientController extends Controller
    */
   public function update(UpdateClientRequest $request, Client $client)
   {
-    $this->authorize('update', $client);
+    Gate::authorize('update', $client);
 
     $client->update($request->validated());
 
@@ -80,7 +90,7 @@ class ClientController extends Controller
    */
   public function destroy(Client $client)
   {
-    $this->authorize('delete', $client);
+    Gate::authorize('delete', $client);
 
     $client->delete();
 

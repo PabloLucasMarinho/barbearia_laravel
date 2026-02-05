@@ -4,47 +4,84 @@
 
 @section('content')
   <section class="main-container">
-    <h1>Editar</h1>
+    <h1>Editar Cliente</h1>
 
-    <form action="{{ route('clients.update', $client) }}" method="POST" class="register-client-form">
+    <form action="{{ route('clients.update', $client) }}" method="POST"
+          class="register-client-form">
       @csrf
       @method('PUT')
 
       <div class="input-container">
-        <label for="name">Nome<span class="required">*</span></label>
-        <input type="text" name="name" id="name" minlength="2" maxlength="255" autocomplete="name"
-          value="{{ $client->name }}" required>
+        <label for="name" class="dynamic-label">
+          Nome:
+        </label>
+        <input type="text" name="name" id="name"
+               minlength="2" maxlength="255" autocomplete="name"
+               value="{{ $client->name }}"
+               class="dynamic-input"
+               placeholder="p.ex. João da Silva"
+               required
+        >
       </div>
 
       <div class="input-container">
-        <label for="document">CPF<span class="required">*</span></label>
-        <input type="text" name="document" id="document" inputmode="numeric" maxlength="14" autocomplete="on"
-          oninput="this.value = this.value
-            .replace(/\D/g, '')
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d{1,2})$/, '$1-$2')"
-          value="{{ $client->document }}" required>
+        <label for="date_of_birth" class="dynamic-label">
+          Nascimento:
+        </label>
+        <input type="text" inputmode="numeric"
+               name="date_of_birth" id="date_of_birth"
+               autocomplete="bday"
+               oninput="this.value = this.value
+                .replace(/\D/g, '')
+                .replace(/^(\d{2})(\d)/, '$1/$2')
+                .replace(/^(\d{2}\/\d{2})(\d)/, '$1/$2')
+                .slice(0, 10)"
+               value="{{ $client->date_of_birth_formatted }}"
+               class="dynamic-input"
+               placeholder="p.ex. 01/01/2000"
+               required
+        >
       </div>
 
       <div class="input-container">
-        <label for="date_of_birth">Nascimento<span class="required">*</span></label>
-        <input type="date" name="date_of_birth" id="date_of_birth" autocomplete="bday"
-          value="{{ $client->date_of_birth->format('Y-m-d') }}" required>
+        <label for="phone" class="dynamic-label">
+          Telefone:
+        </label>
+        <input type="text" name="phone" id="phone"
+               inputmode="numeric" autocomplete="tel-national"
+               maxlength="15"
+               oninput="this.value = this.value
+                .replace(/\D/g, '')
+                .replace(/^(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{4,5})(\d{4})$/, '$1-$2')"
+               value="{{ $client->phone }}"
+               class="dynamic-input"
+               placeholder="p.ex. (00) 91234-5678"
+               required
+        >
       </div>
 
       <div class="input-container">
-        <label for="phone">Telefone<span class="required">*</span></label>
-        <input type="text" name="phone" id="phone" inputmode="numeric" autocomplete="tel-national" maxlength="15"
-          oninput="this.value = this.value
-            .replace(/\D/g, '')
-            .replace(/^(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{4,5})(\d{4})$/, '$1-$2')"
-          value="{{ $client->phone }}" required>
+        <label for="document" class="dynamic-label">
+          CPF:
+        </label>
+        <input type="text" name="document" id="document"
+               inputmode="numeric" maxlength="14" autocomplete="on"
+               oninput="this.value = this.value
+                .replace(/\D/g, '')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2')"
+               value="{{ $client->document }}"
+               class="dynamic-input"
+               placeholder="p.ex. 123.456.789-00"
+               required
+        >
       </div>
 
-      <div class="input-container">
-        <input type="submit" value="Cadastrar" class="btn neutral-btn">
+      <div class="submit-container">
+        <small>Todos os campos são obrigatórios</small>
+        <input type="submit" value="Salvar">
       </div>
 
     </form>
