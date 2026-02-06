@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -13,39 +13,26 @@ class AdminSeeder extends Seeder
    */
   public function run(): void
   {
-    $userUuid = (string) Str::uuid();
-
-    DB::table('users')->insert([
-      'uuid' => $userUuid,
+    $user = User::create([
       'name' => 'Administrador',
       'email' => 'admin@barber.com',
-      'email_verified_at' => now(),
       'password' => bcrypt('Aa123456'),
-      'created_at' => now(),
-      'updated_at' => now(),
+      'email_verified_at' => now(),
     ]);
 
-    $adminRole = DB::table('roles')->where('name', 'admin')->first();
+    $adminRole = Role::where('name', 'admin')->first();
 
-    DB::table('user_role')->insert([
-      'user_uuid' => $userUuid,
-      'role_uuid' => $adminRole->uuid,
-    ]);
+    $user->roles()->attach($adminRole->uuid);
 
-    // admin details
-    DB::table('user_details')->insert([
-      'uuid' => (string) Str::uuid(),
-      'user_uuid' => $userUuid,
+    $user->details()->create([
       'address' => 'Rua do Administrador, 123',
       'address_complement' => 'Casa 2',
       'zip_code' => '12345-123',
       'neighborhood' => 'Centro',
       'city' => 'Rio de Janeiro',
-      'phone' => '21999999999',
+      'phone' => '21964825973',
       'salary' => 12000.00,
       'admission_date' => '2025-01-01',
-      'created_at' => now(),
-      'updated_at' => now(),
     ]);
   }
 }

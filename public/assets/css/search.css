@@ -6,42 +6,42 @@
   border-radius: 1.5rem;
   box-shadow: var(--shadow-s);
   border: none;
-  
-  .search-client {
-      position: absolute;
-      width: inherit;
-      height: inherit;
-      border-radius: inherit;
-      padding: 0 1rem;
-      box-shadow: var(--shadow-s);
-      border: none;
-      border-top: 1px solid var(--bg-light);
-      background-color: var(--bg);
-      outline: none;
-      transition: var(--tran-01);
-      
-      &:hover {
-        box-shadow: var(--shadow-m);
-      }
-      
-      &:focus {
-        box-shadow: var(--shadow-l);
-      }
+
+  .search-input {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    padding: 0 1rem;
+    box-shadow: var(--shadow-s);
+    border: none;
+    border-top: 1px solid var(--bg-light);
+    background-color: var(--bg);
+    outline: none;
+    transition: var(--tran-01);
+
+    &:hover {
+      box-shadow: var(--shadow-m);
+    }
+
+    &:focus {
+      box-shadow: var(--shadow-l);
+    }
   }
-  
+
   button[type="submit"] {
-      position: absolute;
-      right: 0;
-      height: inherit;
-      width: 3rem;
-      border: none;
-      border-left: 2px solid var(--bg-dark);
-      color: var(--dark-muted);
-      border-radius: 0 1.5rem 1.5rem 0;
-      background-color: var(--bg-light);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-top: 1px solid var(--bg-light);
+    position: absolute;
+    right: 0;
+    height: inherit;
+    width: 3rem;
+    border: none;
+    border-left: 2px solid var(--bg-dark);
+    color: var(--dark-muted);
+    border-radius: 0 1.5rem 1.5rem 0;
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--bg-light);
   }
 }

@@ -1,3 +1,7 @@
+@php
+  use \App\Models\User;
+@endphp
+
 <aside class="side-bar closed">
   <button class="material-symbols-rounded side-bar-menu-button" id="menu-button">menu</button>
 
@@ -22,14 +26,16 @@
         </a>
       </li>
 
-      <li @class(['menu-item', 'active' => request()->routeIs('users.*')])>
-        <a href="{{ route('users.index') }}">
-          <i class="material-symbols-rounded">
-            badge
-          </i>
-          Funcionários
-        </a>
-      </li>
+      @can('viewAny', User::class)
+        <li @class(['menu-item', 'active' => request()->routeIs('users.*')])>
+          <a href="{{ route('users.index') }}">
+            <i class="material-symbols-rounded">
+              badge
+            </i>
+            Funcionários
+          </a>
+        </li>
+      @endcan
     </ul>
 
     <form class="logout-form" action="{{ route('logout') }}" method="POST">

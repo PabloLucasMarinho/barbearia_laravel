@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\Traits\UserClientDefaults;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-  use Notifiable;
+  use Notifiable, UserClientDefaults;
 
   protected $primaryKey = 'uuid';
   protected $keyType = 'string';
@@ -33,43 +33,6 @@ class User extends Authenticatable
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
     ];
-  }
-
-  protected function name(): Attribute
-  {
-    return Attribute::make(
-      set: fn($value) => trim($this->formatName($value))
-    );
-  }
-
-  protected function formatName(string $name): string
-  {
-    $name = mb_convert_case(trim($name), MB_CASE_TITLE, 'UTF-8');
-
-    $lower = [' De ', ' Da ', ' Do ', ' Dos ', ' Das ', ' E '];
-
-    return str_replace($lower, array_map('mb_strtolower', $lower), " $name ");
-  }
-
-  protected static function booted(): void
-  {
-    static::saving(function ($user) {
-      if ($user->isDirty('name')) {
-        $user->initials = self::generateInitials($user->name);
-      }
-    });
-  }
-
-  private static function generateInitials(string $name): string
-  {
-    $parts = preg_split('/\s+/', trim($name));
-
-    return strtoupper(
-      Str::ascii(
-        mb_substr($parts[0], 0, 1) .
-        mb_substr(end($parts), 0, 1)
-      )
-    );
   }
 
   public function getAuthIdentifierName(): string
@@ -97,5 +60,10 @@ class User extends Authenticatable
   public function hasRole(string $role): bool
   {
     return $this->roles()->where('name', $role)->exists();
+  }
+
+  public function details(): HasOne
+  {
+    return $this->hasOne(UserDetail::class, 'user_uuid', 'uuid');
   }
 }

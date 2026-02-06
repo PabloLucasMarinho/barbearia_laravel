@@ -1,15 +1,15 @@
 @extends('components.app-layout')
 
-@section('title', 'Clientes')
+@section('title', 'Funcionários')
 
 @section('content')
   <section class="main-container">
-    <h1>Clientes</h1>
+    <h1>Funcionários</h1>
 
-    <form action="{{ route('clients.index') }}" method="GET" class="search-form">
+    <form action="{{ route('users.index') }}" method="GET" class="search-form">
       @csrf
-      <input type="search" name="search" id="search-client"
-             placeholder="Pesquisar cliente..." class="search-input"
+      <input type="search" name="search" id="search-user"
+             placeholder="Pesquisar funcionário..." class="search-input"
              value="{{ request('search') }}">
 
       <button type="submit">
@@ -18,19 +18,19 @@
     </form>
 
     <section class="mobile">
-      @if ($clients->count() === 0)
-        <section class="no-client-message">
-          <p>Nenhum cliente encontrado.</p>
-          <a href="{{ route('clients.create') }}" class="add-btn">
+      @if ($users->count() === 0)
+        <section class="no-user-message">
+          <p>Nenhum funcionário encontrado.</p>
+          <a href="{{ route('users.create') }}" class="add-btn">
             <i class="material-symbols-rounded">
               add
             </i>
           </a>
         </section>
       @else
-        <section class="clients-list">
+        <section class="users-list">
 
-          <a href="{{ route('clients.create') }}" class="add-btn fixed">
+          <a href="{{ route('users.create') }}" class="add-btn fixed">
             <i class="material-symbols-rounded">
               add
             </i>
@@ -40,12 +40,12 @@
             <tr>
               <th>Nome</th>
             </tr>
-            @foreach ($clients as $client)
+            @foreach ($users as $user)
               <tr>
                 <td>
-                  <a href="{{ route('clients.show', $client) }}">
+                  <a href="{{ route('users.show', $user) }}">
                     <span class="initials"
-                          style="background-color: {{$client->color}};color: {{$client->contrast_color}};">{{$client->initials}}</span>{{ $client->name }}
+                          style="background-color: {{$user->color}}; color: {{$user->contrast_color}};">{{$user->initials}}</span>{{ $user->name }}
                   </a>
                 </td>
               </tr>

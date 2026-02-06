@@ -19,9 +19,12 @@ class ClientController extends Controller
 
     $search = $request->query('search');
 
-    $clients = Client::when($search, function ($query, $search) {
+    $clients = Client::query()->when($search, function ($query, $search) {
       $query->where('name', 'like', "%$search%");
-    })->get();
+    })
+      ->orderBy('name')
+      ->paginate(10)
+      ->withQueryString();
 
     return view('clients.index', compact('clients'));
   }

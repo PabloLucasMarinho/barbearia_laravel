@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class EmployeeSeeder extends Seeder
 {
@@ -13,39 +13,26 @@ class EmployeeSeeder extends Seeder
    */
   public function run(): void
   {
-    $userUuid = (string) Str::uuid();
-
-    DB::table('users')->insert([
-      'uuid' => $userUuid,
+    $user = User::create([
       'name' => 'Funcionário',
       'email' => 'employee@barber.com',
-      'email_verified_at' => now(),
       'password' => bcrypt('Aa123456'),
-      'created_at' => now(),
-      'updated_at' => now(),
+      'email_verified_at' => now(),
     ]);
 
-    $employeeRole = DB::table('roles')->where('name', 'employee')->first();
+    $employeeRole = Role::where('name', 'employee')->first();
 
-    DB::table('user_role')->insert([
-      'user_uuid' => $userUuid,
-      'role_uuid' => $employeeRole->uuid,
-    ]);
+    $user->roles()->attach($employeeRole->uuid);
 
-    // admin details
-    DB::table('user_details')->insert([
-      'uuid' => (string) Str::uuid(),
-      'user_uuid' => $userUuid,
+    $user->details()->create([
       'address' => 'Rua do Funcionário, 456',
-      'address_complement' => 'Casa 4',
-      'zip_code' => '12345-123',
-      'neighborhood' => 'Centro',
+      'address_complement' => 'BL1 APT 101',
+      'zip_code' => '67890-321',
+      'neighborhood' => 'Realengo',
       'city' => 'Rio de Janeiro',
-      'phone' => '21999999999',
-      'salary' => 2100.00,
-      'admission_date' => '2025-01-01',
-      'created_at' => now(),
-      'updated_at' => now(),
+      'phone' => '21959736482',
+      'salary' => 1900.00,
+      'admission_date' => '2025-06-01',
     ]);
   }
 }
