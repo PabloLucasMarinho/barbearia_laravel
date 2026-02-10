@@ -2,6 +2,8 @@
 
 @section('title', 'Cadastrar cliente')
 
+@include('components.back-btn')
+
 @section('content')
   <section class="main-container">
     <h1>Cadastrar Cliente</h1>

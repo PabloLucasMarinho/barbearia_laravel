@@ -2,6 +2,8 @@
 
 @section('title', 'Editar cliente')
 
+@include('components.back-btn')
+
 @section('content')
   <section class="main-container">
     <h1>Editar Cliente</h1>

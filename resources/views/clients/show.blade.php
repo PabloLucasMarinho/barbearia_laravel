@@ -2,6 +2,8 @@
 
 @section('title', $client->name)
 
+@include('components.back-btn')
+
 @section('content')
   <section class="main-container">
     <h1>Dados do Cliente</h1>
@@ -10,7 +12,7 @@
       <div class="info-header">
         <span class="initials"
               style="background-color: {{$client->color}};
-              color: {{$client->getContrastColor($client->color)}};">
+              color: {{$client->contrast_color}};">
           {{$client->initials}}
         </span>
         <h2>{{$client->name}}</h2>

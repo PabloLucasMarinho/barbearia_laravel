@@ -1,0 +1,16 @@
+.back-btn {
+  position: fixed;
+  top: 1.5rem;
+  left: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark);
+  background-color: var(--bg);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-s);
+  width: 2rem;
+  height: 2rem;
+}

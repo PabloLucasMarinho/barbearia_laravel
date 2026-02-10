@@ -88,11 +88,8 @@ button[type="submit"] {
 .menu-btn {
   position: fixed;
   top: 1.5rem;
-  right: 1.5rem;
+  right: 0.5rem;
   background-color: var(--bg);
-}
-
-.menu-btn {
   border: none;
   border-radius: 0.5rem;
   box-shadow: var(--shadow-s);
