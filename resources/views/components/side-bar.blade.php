@@ -2,11 +2,10 @@
   use \App\Models\User;
 @endphp
 
+<button class="material-symbols-rounded menu-btn" id="menu-btn">menu</button>
 <aside class="side-bar closed">
-  <button class="material-symbols-rounded side-bar-menu-button" id="menu-button">menu</button>
 
   <section class="menu">
-
     <ul>
       <li @class(['menu-item', 'active' => request()->routeIs('dashboard')])>
         <a href="{{ route('dashboard') }}">
@@ -46,7 +45,6 @@
         </i>
       </button>
     </form>
-
   </section>
 
 </aside>

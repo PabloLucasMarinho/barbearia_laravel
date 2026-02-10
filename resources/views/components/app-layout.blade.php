@@ -17,13 +17,11 @@
 </head>
 
 <body>
-
 @auth
   @include('components.side-bar')
 @endauth
 
 @yield('content')
-
 <script src="{{ asset('assets/js/main.js') }}" defer></script>
 </body>
 

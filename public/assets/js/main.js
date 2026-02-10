@@ -13,27 +13,27 @@ if (passwordInput.length !== 0) {
   });
 }
 
-const sideBarMenuBtn = document.getElementById("menu-button");
+const menuBtn = document.getElementById("menu-btn");
 const sideBar = document.querySelector(".side-bar");
+let toggleMenu = sideBar.classList.contains("closed");
 
-sideBarMenuBtn.addEventListener("click", (event) => {
+
+menuBtn.addEventListener("click", (event) => {
   event.stopPropagation();
-  const isClosed = sideBar.classList.contains("closed");
 
-  isClosed
-    ? sideBar.classList.replace("closed", "open")
-    : sideBar.classList.replace("open", "closed");
+  if (toggleMenu) {
+    sideBar.classList.replace("closed", "open");
+    menuBtn.classList.add("hidden");
+  } else {
+    sideBar.classList.replace("open", "closed");
+    menuBtn.classList.remove("hidden");
+  }
 });
 
 document.addEventListener("click", (event) => {
-  const isOpen = sideBar.classList.contains("open");
-
-  if (
-    isOpen &&
-    !sideBar.contains(event.target) &&
-    !sideBarMenuBtn.contains(event.target)
-  ) {
+  if (toggleMenu && !sideBar.contains(event.target)) {
     sideBar.classList.replace("open", "closed");
+    menuBtn.classList.remove('hidden');
   }
 });
 
