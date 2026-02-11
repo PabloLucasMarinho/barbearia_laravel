@@ -7,11 +7,6 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class Cpf implements ValidationRule
 {
-  /**
-   * Run the validation rule.
-   *
-   * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
-   */
   public function validate(string $attribute, mixed $value, Closure $fail): void
   {
     $cpf = preg_replace('/\D/', '', $value);
@@ -20,8 +15,7 @@ class Cpf implements ValidationRule
       $fail('O CPF informado é inválido.');
       return;
     }
-
-    // Evita CPFs com todos os dígitos iguais
+    
     if (preg_match('/(\d)\1{10}/', $cpf)) {
       $fail('O CPF informado é inválido.');
       return;

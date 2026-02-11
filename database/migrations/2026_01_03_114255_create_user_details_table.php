@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
   /**
    * Run the migrations.
    */
@@ -16,12 +15,14 @@ return new class extends Migration
       $table->foreignUuid('user_uuid')
         ->constrained('users', 'uuid')
         ->cascadeOnDelete();
+      $table->string('document')->unique();
+      $table->date('date_of_birth');
+      $table->string('phone', 20);
       $table->string('address', 100);
       $table->string('address_complement', 50)->nullable();
       $table->string('zip_code', 10);
       $table->string('neighborhood', 50);
       $table->string('city', 50);
-      $table->string('phone', 20);
       $table->decimal('salary', 10);
       $table->date('admission_date');
       $table->timestamps();

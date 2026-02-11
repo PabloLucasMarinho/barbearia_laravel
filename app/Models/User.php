@@ -20,6 +20,16 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
+    'user_uuid',
+    'document',
+    'date_of_birth',
+    'phone',
+    'address',
+    'address_complement',
+    'neighborhood',
+    'city',
+    'salary',
+    'admission_date',
   ];
 
   protected $hidden = [
