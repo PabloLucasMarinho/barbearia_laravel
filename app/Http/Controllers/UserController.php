@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Throwable;
 
 class UserController extends Controller
@@ -47,35 +45,12 @@ class UserController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(StoreUserRequest $request)
+  public function store(StoreUserRequest $request, UserService $service)
   {
     Gate::authorize('create', User::class);
 
-
     try {
-      DB::transaction(function () use ($request) {
-        $tempPassword = Str::password(8);
-
-        $user = User::create([
-          'name' => $request->name,
-          'email' => $request->email,
-          'password' => Hash::make($tempPassword),
-        ]);
-
-        $user->details()->create([
-          'user_uuid' => $user->uuid,
-          'document' => $request->document,
-          'date_of_birth' => $request->date_of_birth,
-          'phone' => $request->phone,
-          'zip_code' => $request->zip_code,
-          'address' => $request->address,
-          'address_complement' => $request->address_complement,
-          'neighborhood' => $request->neighborhood,
-          'city' => $request->city,
-          'salary' => $request->salary,
-          'admission_date' => $request->admission_date,
-        ]);
-      });
+      $service->createEmployee($request->validated());
 
       return redirect()
         ->route('users.index')
@@ -97,7 +72,11 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    //
+    Gate::authorize('view', $user);
+
+    $user->load('details');
+
+    return view('users.show', compact('user'));
   }
 
   /**

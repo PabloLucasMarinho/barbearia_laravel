@@ -153,12 +153,12 @@
       </div>
 
       <div class="input-container">
-        <label for="address_compliment" class="dynamic-label">
+        <label for="address_complement" class="dynamic-label">
           Complemento:
         </label>
-        <input type="text" name="address_compliment" id="address_compliment"
+        <input type="text" name="address_complement" id="address_complement"
                maxlength="50" autocomplete="address-line2"
-               value="{{ old('address_compliment') }}"
+               value="{{ old('address_complement') }}"
                class="dynamic-input"
                placeholder="p.ex. Casa 1"
         >

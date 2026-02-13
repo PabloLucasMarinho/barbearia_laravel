@@ -19,7 +19,7 @@
 
     <section class="mobile">
       @if ($clients->count() === 0)
-        <section class="no-client-message">
+        <section class="not-find-message">
           <p>Nenhum cliente encontrado.</p>
           <a href="{{ route('clients.create') }}" class="add-btn">
             <i class="material-symbols-rounded">
@@ -28,7 +28,7 @@
           </a>
         </section>
       @else
-        <section class="clients-list">
+        <section class="list">
 
           <a href="{{ route('clients.create') }}" class="add-btn fixed">
             <i class="material-symbols-rounded">

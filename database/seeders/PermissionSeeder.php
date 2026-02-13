@@ -23,6 +23,11 @@ class PermissionSeeder extends Seeder
       'appointments.create',
       'appointments.update',
       'appointments.delete',
+
+      'users.view',
+      'users.create',
+      'users.update',
+      'users.delete',
     ];
 
     foreach ($permissions as $permission) {

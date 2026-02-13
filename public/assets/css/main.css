@@ -1,9 +1,10 @@
 @import "login.css";
 @import "sidebar.css";
 @import "search.css";
+@import "list-itens.css";
 @import "forms.css";
-@import "clients.css";
-@import "users.css";
+@import "show-card.css";
+@import "delete-modal.css";
 @import "back.css";
 
 :root {

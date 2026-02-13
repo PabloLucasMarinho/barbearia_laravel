@@ -19,7 +19,7 @@
 
     <section class="mobile">
       @if ($users->count() === 0)
-        <section class="no-user-message">
+        <section class="not-find-message">
           <p>Nenhum funcionário encontrado.</p>
           <a href="{{ route('users.create') }}" class="add-btn">
             <i class="material-symbols-rounded">
@@ -28,7 +28,7 @@
           </a>
         </section>
       @else
-        <section class="users-list">
+        <section class="list">
 
           <a href="{{ route('users.create') }}" class="add-btn fixed">
             <i class="material-symbols-rounded">
