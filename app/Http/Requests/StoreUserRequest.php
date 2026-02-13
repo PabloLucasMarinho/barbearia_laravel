@@ -22,9 +22,8 @@ class StoreUserRequest extends FormRequest
     return [
       'name' => 'required|string|max:255',
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|string|min:8|confirmed',
 
-      'document' => ['required', new Cpf, Rule::unique('users', 'document')],
+      'document' => ['required', new Cpf, Rule::unique('user_details', 'document')],
       'date_of_birth' => ['required', new DateOfBirth],
       'phone' => ['required', new Phone],
       'address' => 'required|string|max:100',
@@ -32,7 +31,7 @@ class StoreUserRequest extends FormRequest
       'zip_code' => ['required', new Cep],
       'neighborhood' => 'required|string|max:50',
       'city' => 'required|string|max:50',
-      'salary' => 'required|numeric|min:0|max:999999.99',
+      'salary' => 'required|numeric|min:0|max:99999999.99',
       'admission_date' => 'required|date|before:tomorrow',
     ];
   }
@@ -43,9 +42,6 @@ class StoreUserRequest extends FormRequest
       'name.required' => 'O :attribute é obrigatório.',
       'email.required' => 'O :attribute é obrigatório.',
       'email.unique' => 'Este :attribute já está cadastrado.',
-      'password.required' => 'A :attribute é obrigatória.',
-      'password.min' => 'A :attribute deve ter no mínimo 8 caracteres.',
-      'password.confirmed' => 'As senhas não conferem.',
       'document.required' => 'O :attribute é obrigatório.',
       'document.unique' => 'Este :attribute já está cadastrado.',
       'date_of_birth.required' => 'A :attribute é obrigatória.',
@@ -62,7 +58,6 @@ class StoreUserRequest extends FormRequest
     return [
       'name' => 'nome',
       'email' => 'e-mail',
-      'password' => 'senha',
       'document' => 'CPF',
       'date_of_birth' => 'data de nascimento',
       'phone' => 'telefone',
@@ -78,23 +73,38 @@ class StoreUserRequest extends FormRequest
 
   protected function prepareForValidation(): void
   {
-    $dateOfBirth = $this->input('date_of_birth');
+    $salary = $this->input('salary');
 
-    if (!is_string($dateOfBirth)) {
+    if ($salary) {
+      $salary_correct = str_replace('.', '', $salary);
+      $salary_correct = str_replace(',', '.', $salary_correct);
+
+      $this->merge([
+        'salary' => $salary_correct
+      ]);
+    }
+
+    $this->normalizeDate('date_of_birth');
+    $this->normalizeDate('admission_date');
+  }
+
+  private function normalizeDate(string $field, string $format = 'd/m/Y'): void
+  {
+    $value = $this->input($field);
+
+    if (!is_string($value)) {
       return;
     }
 
     try {
-      if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $dateOfBirth)) {
+      if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $value)) {
         $this->merge([
-          'date_of_birth' => Carbon::createFromFormat(
-            'd/m/Y',
-            $dateOfBirth
-          )->format('Y-m-d'),
+          $field => Carbon::createFromFormat($format, $value)
+            ->format('Y-m-d'),
         ]);
       }
     } catch (\Throwable) {
-      // Não faz nada → a validação vai falhar depois
+      // Não faz nada, a validação vai falhar depois
     }
   }
 }

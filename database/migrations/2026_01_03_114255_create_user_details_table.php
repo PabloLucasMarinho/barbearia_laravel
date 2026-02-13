@@ -20,10 +20,10 @@ return new class extends Migration {
       $table->string('phone', 20);
       $table->string('address', 100);
       $table->string('address_complement', 50)->nullable();
-      $table->string('zip_code', 10);
+      $table->string('zip_code', 9);
       $table->string('neighborhood', 50);
       $table->string('city', 50);
-      $table->decimal('salary', 10);
+      $table->decimal('salary', 10,2)->nullable();
       $table->date('admission_date');
       $table->timestamps();
       $table->softDeletes();

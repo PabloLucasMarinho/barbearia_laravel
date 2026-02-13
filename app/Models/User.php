@@ -30,6 +30,7 @@ class User extends Authenticatable
     'city',
     'salary',
     'admission_date',
+    'zip_code',
   ];
 
   protected $hidden = [

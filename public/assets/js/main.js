@@ -71,3 +71,44 @@ function paddingAdjust() {
 window.addEventListener('load', paddingAdjust);
 
 window.addEventListener('resize', paddingAdjust);
+
+const zipInput = document.getElementById('zip_code');
+
+zipInput.addEventListener('blur', function () {
+  let cep = this.value.replace(/\D/g, '');
+
+  if (cep.length !== 8) {
+    return;
+  }
+
+  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(res => res.json()).then(data => {
+      if (data.erro) {
+        return;
+      }
+
+      document.getElementById('address').value = data.logradouro;
+      document.getElementById('neighborhood').value = data.bairro;
+      document.getElementById('city').value = data.localidade;
+  }).catch(error => {
+    console.error('Erro ao buscar CEP');
+  });
+});
+
+const salaryInput = document.getElementById('salary');
+
+salaryInput.addEventListener('input', function (e) {
+  let value = e.target.value.replace(/\D/g, '');
+
+  if (!value) {
+    e.target.value = '';
+    return;
+  }
+
+  value = (parseInt(value) / 100).toFixed(2);
+
+  e.target.value = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(value);
+});

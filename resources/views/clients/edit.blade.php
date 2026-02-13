@@ -9,7 +9,7 @@
     <h1>Editar Cliente</h1>
 
     <form action="{{ route('clients.update', $client) }}" method="POST"
-          class="register-client-form">
+          class="form">
       @csrf
       @method('PUT')
 

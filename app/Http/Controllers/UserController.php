@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Throwable;
 
 class UserController extends Controller
@@ -50,12 +51,15 @@ class UserController extends Controller
   {
     Gate::authorize('create', User::class);
 
+
     try {
       DB::transaction(function () use ($request) {
+        $tempPassword = Str::password(8);
+
         $user = User::create([
           'name' => $request->name,
           'email' => $request->email,
-          'password' => Hash::make($request->password),
+          'password' => Hash::make($tempPassword),
         ]);
 
         $user->details()->create([
@@ -63,6 +67,7 @@ class UserController extends Controller
           'document' => $request->document,
           'date_of_birth' => $request->date_of_birth,
           'phone' => $request->phone,
+          'zip_code' => $request->zip_code,
           'address' => $request->address,
           'address_complement' => $request->address_complement,
           'neighborhood' => $request->neighborhood,

@@ -9,7 +9,7 @@
     <h1>Cadastrar Cliente</h1>
 
     <form action="{{ route('clients.store') }}" method="POST"
-          class="register-client-form">
+          class="form">
       @csrf
 
       <div class="input-container">
