@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 class UserService
@@ -18,7 +19,7 @@ class UserService
       $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
-        'password' => Hash::make($tempPassword),
+        'password' => null,
       ]);
 
       $user->details()->create([
@@ -33,6 +34,10 @@ class UserService
         'city' => $data['city'],
         'salary' => $data['salary'],
         'admission_date' => $data['admission_date'],
+      ]);
+
+      Password::sendResetLink([
+        'email' => $user->email,
       ]);
 
       $employeeRoleUuid = Role::where('name', 'employee')->value('uuid');

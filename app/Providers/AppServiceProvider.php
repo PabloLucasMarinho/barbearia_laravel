@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use App\Listeners\MarkEmailAsVerifiedAfterReset;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\User;
 use App\Policies\AppointmentPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\UserPolicy;
+use Event;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\ServiceProvider;
@@ -38,5 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
       return config('app.url') . '/reset-password/' . $token . '?email=' . urlencode($encryptedEmail);
     });
+
+    Event::listen(
+      PasswordReset::class,
+      MarkEmailAsVerifiedAfterReset::class
+    );
   }
 }

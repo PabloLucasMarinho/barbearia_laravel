@@ -48,5 +48,4 @@
     </form>
 
   </section>
-  </x-app-layout>
 @endsection
