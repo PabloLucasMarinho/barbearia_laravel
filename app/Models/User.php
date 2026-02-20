@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\UserClientDefaults;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,17 +20,7 @@ class User extends Authenticatable
     'name',
     'email',
     'password',
-    'user_uuid',
-    'document',
-    'date_of_birth',
-    'phone',
-    'address',
-    'address_complement',
-    'neighborhood',
-    'city',
-    'salary',
-    'admission_date',
-    'zip_code',
+    'role_uuid',
   ];
 
   protected $hidden = [
@@ -51,26 +41,19 @@ class User extends Authenticatable
     return 'uuid';
   }
 
+  public function getRouteKeyName(): string
+  {
+    return 'uuid';
+  }
+
+  public function role(): BelongsTo
+  {
+    return $this->belongsTo(Role::class, 'role_uuid', 'uuid');
+  }
+
   public function permissions()
   {
-    return $this->role->permissions();
-  }
-
-  public function roles(): BelongsToMany
-  {
-    return $this->belongsToMany(
-      Role::class,
-      'user_role',
-      'user_uuid',
-      'role_uuid',
-      'uuid',
-      'uuid'
-    );
-  }
-
-  public function hasRole(string $role): bool
-  {
-    return $this->roles()->where('name', $role)->exists();
+    return $this->role?->permissions();
   }
 
   public function details(): HasOne

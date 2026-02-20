@@ -31,7 +31,7 @@ class StoreUserRequest extends FormRequest
       'zip_code' => ['required', new Cep],
       'neighborhood' => 'required|string|max:50',
       'city' => 'required|string|max:50',
-      'salary' => 'required|numeric|min:0|max:99999999.99',
+      'salary' => 'nullable|numeric|min:0|max:99999999.99',
       'admission_date' => 'required|date|before:tomorrow',
     ];
   }
@@ -48,7 +48,6 @@ class StoreUserRequest extends FormRequest
       'phone.required' => 'O :attribute é obrigatório.',
       'address.required' => 'O :attribute é obrigatório',
       'zip_code.required' => 'O :attribute é obrigatório.',
-      'salary.required' => 'O :attribute é obrigatório.',
       'admission_date.required' => 'A :attribute é obrigatória.',
     ];
   }

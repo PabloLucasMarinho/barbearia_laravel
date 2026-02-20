@@ -193,8 +193,12 @@ body {
   font-weight: 700;
 }
 
-.required {
-  color: var(--danger);
+.danger-color {
+  color: var(--danger-dark) !important;
+}
+
+.info-color {
+  color: var(--info) !important;
 }
 
 .material-symbols-rounded {

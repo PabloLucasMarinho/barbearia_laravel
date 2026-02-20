@@ -8,7 +8,7 @@ class UserPolicy
 {
   public function before(User $user, string $ability): ?bool
   {
-    if ($user->hasRole('admin')) {
+    if ($user->role->name === 'admin') {
       return true;
     }
 

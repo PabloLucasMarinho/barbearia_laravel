@@ -71,7 +71,7 @@
 
         <hr>
 
-        <p>
+        <p class="address">
           <span>
             <i class="material-symbols-rounded">home</i>
             Endereço
@@ -86,16 +86,16 @@
       </div>
 
       <div class="info-footer">
-        <a class="material-symbols-rounded">schedule</a>
+        <a class="material-symbols-rounded info-color">schedule</a>
         @can('update', $user)
-          <a href="{{route('clients.edit', $user)}}"
+          <a href="{{route('users.edit', $user)}}"
              class="material-symbols-rounded">
             edit
           </a>
         @endcan
         @can('delete', $user)
-          <a class="material-symbols-rounded"
-             data-action="{{route('clients.destroy', $user)}}"
+          <a class="material-symbols-rounded danger-color"
+             data-action="{{route('users.destroy', $user)}}"
              data-name="{{$user->name}}"
              onclick="openDeleteModal(this)"
           >

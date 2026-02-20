@@ -13,16 +13,15 @@ class EmployeeSeeder extends Seeder
    */
   public function run(): void
   {
+    $employeeRoleUuid = Role::where('name', 'employee')->value('uuid');
+
     $user = User::create([
       'name' => 'Funcionário',
       'email' => 'employee@barber.com',
-      'password' => bcrypt('Aa123456'),
       'email_verified_at' => now(),
+      'password' => bcrypt('Aa123456'),
+      'role_uuid' => $employeeRoleUuid,
     ]);
-
-    $employeeRole = Role::where('name', 'employee')->first();
-
-    $user->roles()->attach($employeeRole->uuid);
 
     $user->details()->create([
       'document' => '318.664.730-42',

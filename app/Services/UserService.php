@@ -5,21 +5,20 @@ namespace App\Services;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 class UserService
 {
-  public function createEmployee(array $data): User
+  public function createEmployee(array $data): void
   {
-    return DB::transaction(function () use ($data) {
-      $tempPassword = Str::password(8);
+    DB::transaction(function () use ($data) {
+      $roleUuid = Role::where('name', 'employee')->value('uuid');
 
       $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
         'password' => null,
+        'role_uuid' => $roleUuid,
       ]);
 
       $user->details()->create([
@@ -39,11 +38,32 @@ class UserService
       Password::sendResetLink([
         'email' => $user->email,
       ]);
+    });
+  }
 
-      $employeeRoleUuid = Role::where('name', 'employee')->value('uuid');
-      $user->roles()->attach($employeeRoleUuid);
+  public function updateEmployee(array $data, User $user): void
+  {
+    DB::transaction(function () use ($data, $user) {
+      $role = Role::where('name', $data['role'])->firstOrFail();
 
-      return $user;
+      $user->update([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'role_uuid' => $role->uuid,
+      ]);
+
+      $user->details()->update([
+        'document' => $data['document'],
+        'date_of_birth' => $data['date_of_birth'],
+        'phone' => $data['phone'],
+        'zip_code' => $data['zip_code'],
+        'address' => $data['address'],
+        'address_complement' => $data['address_complement'],
+        'neighborhood' => $data['neighborhood'],
+        'city' => $data['city'],
+        'salary' => $data['salary'],
+        'admission_date' => $data['admission_date'],
+      ]);
     });
   }
 }

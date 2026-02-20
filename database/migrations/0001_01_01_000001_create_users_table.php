@@ -18,6 +18,9 @@ return new class extends Migration {
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password', 200)->nullable();
       $table->string('color', 7)->nullable();
+      $table->foreignUuid('role_uuid')
+            ->constrained('roles', 'uuid')
+            ->cascadeOnDelete();
       $table->rememberToken();
       $table->timestamps();
       $table->softDeletes();

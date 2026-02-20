@@ -57,7 +57,7 @@ class UserController extends Controller
         ->with('success', 'Funcionário cadastrado com sucesso!.');
 
     } catch (Throwable $e) {
-      Log::error('Erro ao criar usuário', [
+      Log::error('Erro ao criar funcionário', [
         'exception' => $e,
       ]);
 
@@ -84,15 +84,36 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    //
+    Gate::authorize('update', $user);
+
+    $user->load('details', 'role');
+
+    return view('users.edit', compact('user'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateUserRequest $request, User $user)
+  public function update(UpdateUserRequest $request, User $user, UserService $service)
   {
-    //
+    Gate::authorize('update', $user);
+
+    try {
+      $service->updateEmployee($request->validated(), $user);
+
+      return redirect()
+        ->route('users.index')
+        ->with('success', 'Funcionário editado com sucesso!.');
+
+    } catch (Throwable $e) {
+      Log::error('Erro ao editar funcionário', [
+        'exception' => $e,
+      ]);
+
+      return back()
+        ->withInput()
+        ->with('error', 'Erro ao editar funcionário. Tente novamente.');
+    }
   }
 
   /**
@@ -100,6 +121,10 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    Gate::authorize('delete', $user);
+
+    $user->delete();
+
+    return redirect()->route('users.index');
   }
 }

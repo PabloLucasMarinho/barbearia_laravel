@@ -41,7 +41,6 @@ tr:nth-of-type(n+3):not(:last-child) td {
 }
 
 td {
-  padding: 1rem 0 1rem 0.5rem;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -51,11 +50,13 @@ td {
   background-color: var(--bg-light);
 
   a {
+    width: 100%;
     display: flex;
     gap: .5rem;
     align-items: center;
     text-decoration: none;
     color: inherit;
+    padding: 1rem 0 1rem 0.5rem;
   }
 }
 

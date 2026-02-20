@@ -44,7 +44,6 @@
       strong {
         font-size: 0.9rem;
         color: var(--dark);
-        text-align: justify;
       }
     }
   }
@@ -67,14 +66,12 @@
       border-radius: 0.5rem;
       width: 2.5rem;
       height: 2.5rem;
-
-      &:first-child {
-        color: var(--info);
-      }
-
-      &:last-child {
-        color: var(--danger-dark);
-      }
     }
   }
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 }

@@ -45,7 +45,7 @@
       </div>
 
       <div class="info-footer">
-        <a class="material-symbols-rounded">schedule</a>
+        <a class="material-symbols-rounded info-color">schedule</a>
         @can('update', $client)
           <a href="{{route('clients.edit', $client)}}"
              class="material-symbols-rounded">
@@ -53,7 +53,7 @@
           </a>
         @endcan
         @can('delete', $client)
-          <a class="material-symbols-rounded"
+          <a class="material-symbols-rounded danger-color"
              data-action="{{route('clients.destroy', $client)}}"
              data-name="{{$client->name}}"
              onclick="openDeleteModal(this)"

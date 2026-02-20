@@ -13,16 +13,15 @@ class AdminSeeder extends Seeder
    */
   public function run(): void
   {
+    $adminRoleUuid = Role::where('name', 'admin')->value('uuid');
+
     $user = User::create([
       'name' => 'Administrador',
       'email' => 'admin@barber.com',
-      'password' => bcrypt('Aa123456'),
       'email_verified_at' => now(),
+      'password' => bcrypt('Aa123456'),
+      'role_uuid' => $adminRoleUuid,
     ]);
-
-    $adminRole = Role::where('name', 'admin')->first();
-
-    $user->roles()->attach($adminRole->uuid);
 
     $user->details()->create([
       'document' => '376.694.980-21',

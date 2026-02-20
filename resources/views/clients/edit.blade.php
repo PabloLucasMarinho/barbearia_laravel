@@ -8,8 +8,7 @@
   <section class="main-container">
     <h1>Editar Cliente</h1>
 
-    <form action="{{ route('clients.update', $client) }}" method="POST"
-          class="form">
+    <form action="{{ route('clients.update', $client) }}" method="POST" class="form">
       @csrf
       @method('PUT')
 

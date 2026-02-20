@@ -1,15 +1,16 @@
 @extends('components.app-layout')
 
-@section('title', 'Cadastrar funcionário')
+@section('title', 'Editar funcionário')
 
 @include('components.back-btn')
 
 @section('content')
   <section class="main-container">
-    <h1>Cadastrar Funcionário</h1>
+    <h1>Editar Funcionário</h1>
 
-    <form action="{{ route('users.store') }}" method="POST" class="form">
+    <form action="{{ route('users.update', $user) }}" method="POST" class="form">
       @csrf
+      @method('PUT')
 
       <div class="input-container">
         <label for="name" class="dynamic-label">
@@ -17,7 +18,7 @@
         </label>
         <input type="text" name="name" id="name"
                minlength="2" maxlength="255" autocomplete="name"
-               value="{{ old('name') }}"
+               value="{{ $user->name }}"
                class="dynamic-input"
                placeholder="p.ex. João da Silva"
                required
@@ -30,7 +31,7 @@
         </label>
         <input type="email" name="email" id="email"
                minlength="2" maxlength="255" autocomplete="email"
-               value="{{ old('email') }}"
+               value="{{ $user->email }}"
                class="dynamic-input"
                placeholder="p.ex. joao@gmail.com"
                required
@@ -43,7 +44,7 @@
         </label>
         <input type="text" name="salary" id="salary"
                maxlength="13" autocomplete="off"
-               value="{{ old('salary') }}" inputmode="decimal"
+               value="{{ $user->details->salary }}" inputmode="decimal"
                class="dynamic-input"
                placeholder="p.ex. 2.500,00"
         >
@@ -61,7 +62,7 @@
                 .replace(/^(\d{2})(\d)/, '$1/$2')
                 .replace(/^(\d{2}\/\d{2})(\d)/, '$1/$2')
                 .slice(0, 10)"
-               value="{{ old('admission_date') }}"
+               value="{{ $user->details->admission_date_formatted }}"
                class="dynamic-input"
                placeholder="p.ex. 01/01/2000"
                required
@@ -80,7 +81,7 @@
                 .replace(/^(\d{2})(\d)/, '$1/$2')
                 .replace(/^(\d{2}\/\d{2})(\d)/, '$1/$2')
                 .slice(0, 10)"
-               value="{{ old('date_of_birth') }}"
+               value="{{ $user->details->date_of_birth_formatted }}"
                class="dynamic-input"
                placeholder="p.ex. 01/01/2000"
                required
@@ -98,7 +99,7 @@
                 .replace(/\D/g, '')
                 .replace(/^(\d{2})(\d)/, '($1) $2')
                 .replace(/(\d{4,5})(\d{4})$/, '$1-$2')"
-               value="{{ old('phone') }}"
+               value="{{ $user->details->phone }}"
                class="dynamic-input"
                placeholder="p.ex. (00) 91234-5678"
                required
@@ -116,7 +117,7 @@
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2')"
-               value="{{ old('document') }}"
+               value="{{ $user->details->document }}"
                class="dynamic-input"
                placeholder="p.ex. 123.456.789-00"
                required
@@ -129,7 +130,7 @@
         </label>
         <input type="text" name="zip_code" id="zip_code"
                maxlength="9" autocomplete="postal_code"
-               value="{{ old('zip_code') }}"
+               value="{{ $user->details->zip_code }}"
                class="dynamic-input"
                oninput="this.value = this.value
                 .replace(/\D/g, '')
@@ -145,7 +146,7 @@
         </label>
         <input type="text" name="address" id="address"
                maxlength="100" autocomplete="address-line1"
-               value="{{ old('address') }}"
+               value="{{ $user->details->address }}"
                class="dynamic-input"
                placeholder="p.ex. Rua da Feira, 123"
                required
@@ -158,7 +159,7 @@
         </label>
         <input type="text" name="address_complement" id="address_complement"
                maxlength="50" autocomplete="address-line2"
-               value="{{ old('address_complement') }}"
+               value="{{ $user->details->address_complement }}"
                class="dynamic-input"
                placeholder="p.ex. Casa 1"
         >
@@ -170,7 +171,7 @@
         </label>
         <input type="text" name="neighborhood" id="neighborhood"
                maxlength="50" autocomplete="address-line3"
-               value="{{ old('neighborhood') }}"
+               value="{{ $user->details->neighborhood }}"
                class="dynamic-input"
                placeholder="p.ex. Realengo"
         >
@@ -182,14 +183,24 @@
         </label>
         <input type="text" name="city" id="city"
                maxlength="50" autocomplete="address-level2"
-               value="{{ old('city') }}"
+               value="{{ $user->details->city }}"
                class="dynamic-input"
                placeholder="p.ex. Realengo"
         >
       </div>
 
+      <div class="input-container">
+        <label for="role" class="dynamic-label">
+          Função: <span class="required">*</span>
+        </label>
+        <select name="role" id="role" class="dynamic-input">
+          <option value="employee" {{ $user->role->name === 'employee' ? 'selected' : '' }} >Funcionário</option>
+          <option value="admin" {{ $user->role->name ==='admin' ? 'selected' : '' }} >Administrador</option>
+        </select>
+      </div>
+
       <div class="submit-container">
-        <small>Todos os campos com <span class="required">*</span> são obrigatórios</small>
+        <small>Os campos com <span class="required">*</span> são obrigatórios</small>
         <input type="submit" value="Cadastrar">
       </div>
 

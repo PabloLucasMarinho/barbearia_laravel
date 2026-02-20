@@ -9,7 +9,7 @@ class ClientPolicy
 {
   public function before(User $user, string $ability): ?bool
   {
-    if ($user->hasRole('admin')) {
+    if ($user->role->name === 'admin') {
       return true;
     }
 
@@ -21,7 +21,7 @@ class ClientPolicy
    */
   public function viewAny(User $user): bool
   {
-    return $user->hasRole('employee');
+    return $user->role->name ==='employee';
   }
 
   /**
@@ -29,7 +29,7 @@ class ClientPolicy
    */
   public function view(User $user, Client $client): bool
   {
-    return $user->hasRole('employee');
+    return $user->role->name ==='employee';
   }
 
   /**
@@ -37,7 +37,7 @@ class ClientPolicy
    */
   public function create(User $user): bool
   {
-    return $user->hasRole('employee');
+    return $user->role->name ==='employee';
   }
 
   /**
@@ -45,7 +45,7 @@ class ClientPolicy
    */
   public function update(User $user, Client $client): bool
   {
-    return $user->hasRole('employee') && $client->user_uuid === $user->uuid;
+    return $user->role->name ==='employee' && $client->user_uuid === $user->uuid;
   }
 
   /**

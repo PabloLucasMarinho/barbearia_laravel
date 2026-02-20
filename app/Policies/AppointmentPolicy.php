@@ -37,7 +37,7 @@ class AppointmentPolicy
    */
   public function update(User $user, Appointment $appointment): bool
   {
-    if ($user->hasRole('admin')) {
+    if ($user->role->name ==='admin') {
       return true;
     }
 
