@@ -62,22 +62,6 @@ docker compose up -d --build
 
 Wait until the build process finishes.
 
-### 3. File Permissions (Docker + Linux)
-
-<strong style="color: red;">ONLY ON THE FIRST RUN OF THE APPLICATION IN DEVELOPMENT PRODUCTION!</strong>
-
-This project uses **bind mounts** (`.:/var/www`) to allow editing files directly from the host (VS Code, Git, etc.).  
-To avoid permission issues, the PHP container runs with the **same UID/GID as the host user**.
-
-#### Why is this necessary?
-
-Without this setup, the following problems are common:
-
-- Permission errors when saving files in VS Code
-- Files created as `root` or `www-data`
-- Git warnings such as _"detected dubious ownership"_
-- The need to use `sudo` unnecessarily
-
 ### 3. Install dependencies and configure the application
 
 Run the following commands in order:
