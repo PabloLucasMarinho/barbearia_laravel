@@ -1,7 +1,24 @@
 # ✂️ Barber Shop System
 
-A barbershop management system developed with **Laravel 12**, using **Laravel Fortify** for authentication and **Blade** as the templating engine.  
+> 🚧 **Work in Progress**  
+> This project is currently under active development and may change frequently.
+
+A barbershop management system developed with **Laravel 12**, using **Laravel Fortify** for authentication and **Blade** as the templating engine.
+
+📱 **Mobile First Approach**  
+The interface is being designed primarily for mobile devices.  
+Because of that, the desktop version may currently look unpolished or visually inconsistent.  
+A dedicated responsive layout for larger screens is planned for future updates.
+
 The application runs in a fully **Dockerized environment**, ensuring easy setup and consistent execution across different machines.
+
+---
+
+## 🧠 System Architecture
+
+Below is a high-level overview of the system structure until now:
+
+![barbershop_der](https://github.com/user-attachments/assets/d4689bf1-2db6-4493-afc0-682d2dafcd8f)
 
 ---
 
@@ -45,32 +62,7 @@ docker compose up -d --build
 
 Wait until the build process finishes.
 
-### 3. File Permissions (Docker + Linux)
-
-<strong style="color: red;">ONLY ON THE FIRST RUN OF THE APPLICATION IN DEVELOPMENT PRODUCTION!</strong>
-
-This project uses **bind mounts** (`.:/var/www`) to allow editing files directly from the host (VS Code, Git, etc.).  
-To avoid permission issues, the PHP container runs with the **same UID/GID as the host user**.
-
-#### Why is this necessary?
-
-Without this setup, the following problems are common:
-
-- Permission errors when saving files in VS Code
-- Files created as `root` or `www-data`
-- Git warnings such as _"detected dubious ownership"_
-- The need to use `sudo` unnecessarily
-
-#### How to configure (Linux)
-
-On the **root project terminal**, run:
-
-```bash
-export DOCKER_UID=$(id -u)
-export DOCKER_GID=$(id -g)
-```
-
-### 4. Install dependencies and configure the application
+### 3. Install dependencies and configure the application
 
 Run the following commands in order:
 
@@ -86,7 +78,7 @@ Seed the database with sample data:
 docker compose exec app php artisan db:seed
 ```
 
-### 5. Access the application
+### 4. Access the application
 
 After completing the steps above, the application will be available at:
 
@@ -123,12 +115,6 @@ cp .env.example .env
 
 Authentication is handled by Laravel Fortify, without using front-end frameworks such as Vue or React.
 The UI is built using Blade + HTML + CSS only, with no external UI libraries.
-
----
-
-## Project Status
-
-🚧 Work in progress 🚧
 
 ---
 
