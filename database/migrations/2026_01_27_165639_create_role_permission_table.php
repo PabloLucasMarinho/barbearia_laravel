@@ -15,11 +15,9 @@ return new class extends Migration
       $table->foreignUuid('role_uuid')
         ->constrained('roles', 'uuid')
         ->cascadeOnDelete();
-
       $table->foreignUuid('permission_uuid')
         ->constrained('permissions', 'uuid')
         ->cascadeOnDelete();
-
       $table->primary(['role_uuid', 'permission_uuid']);
     });
   }

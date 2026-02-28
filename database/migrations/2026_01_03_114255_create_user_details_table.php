@@ -23,7 +23,7 @@ return new class extends Migration {
       $table->string('zip_code', 9);
       $table->string('neighborhood', 50);
       $table->string('city', 50);
-      $table->decimal('salary', 10,2)->nullable();
+      $table->decimal('salary', 10)->nullable();
       $table->date('admission_date');
       $table->timestamps();
       $table->softDeletes();
